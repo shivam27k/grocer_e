@@ -1,4 +1,3 @@
-// export './consts.dart';
 export './colors.dart';
 export './images.dart';
 export './strings.dart';
