@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+const Color blackColor = Color.fromRGBO(0, 0, 0, 0.773);
+
+const Color logoTextColor = Color.fromRGBO(255, 191, 83, 1);
+
 const Color fontGrey = Color.fromRGBO(107, 115, 119, 1);
 
 const Color darkFontGrey = Color.fromRGBO(62, 68, 71, 1);
