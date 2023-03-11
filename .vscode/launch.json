@@ -1,0 +1,28 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "grocer_e",
+            "cwd": "grocer_e",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "grocer_e (profile mode)",
+            "cwd": "grocer_e",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "grocer_e (release mode)",
+            "cwd": "grocer_e",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        }
+    ]
+}

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 const Color blackColor = Color.fromRGBO(0, 0, 0, 1);
 
-const Color splashBgColor = Color.fromRGBO(199, 0, 57, 1);
+const Color splashBgColor = Color.fromRGBO(25, 40, 65, 1);
 
 const Color logoTextColor = Color.fromRGBO(255, 191, 83, 1);
 

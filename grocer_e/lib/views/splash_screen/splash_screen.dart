@@ -16,35 +16,57 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return AnimatedSplashScreen(
-      splash: Column(
-        children: [
-          appLogoWidget(),
-          appName.text
-              .size(35)
-              .color(logoTextColor)
-              .fontWeight(FontWeight.bold)
-              .make(),
-          appVersion.text
-              .size(10)
-              .color(descColor)
-              .fontWeight(FontWeight.w400)
-              .make(),
-          const SizedBox(height: 450),
-          const CircularProgressIndicator(
-            color: logoTextColor,
-          ),
-          const SizedBox(height: 20),
-          credits.text
-              .size(10)
-              .color(descColor)
-              .fontWeight(FontWeight.w400)
-              .make(),
+      splash: Stack(
+        fit: StackFit.expand,
+        children: <Widget>[
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Expanded(
+                flex: 3,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    appLogoWidget(),
+                    appName.text
+                        .size(35)
+                        .fontWeight(FontWeight.bold)
+                        .color(logoTextColor)
+                        .make(),
+                    appVersion.text
+                        .color(descColor)
+                        .size(10)
+                        .fontWeight(FontWeight.w700)
+                        .make(),
+                  ],
+                ),
+              ),
+              80.heightBox,
+              Expanded(
+                flex: 1,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    const CircularProgressIndicator(
+                      color: logoTextColor,
+                    ),
+                    20.heightBox,
+                    credits.text
+                        .color(descColor)
+                        .size(10)
+                        .fontWeight(FontWeight.w700)
+                        .make(),
+                  ],
+                ),
+              )
+            ],
+          )
         ],
       ),
-      backgroundColor: blackColor,
+      backgroundColor: splashBgColor,
       nextScreen: const LoginScreen(),
-      splashIconSize: 750,
-      duration: 3000,
+      splashIconSize: 900,
+      duration: 3500,
       splashTransition: SplashTransition.fadeTransition,
       pageTransitionType: PageTransitionType.rightToLeft,
     );
