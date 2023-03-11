@@ -63,9 +63,9 @@ flutter:
 
     # To add assets to your application, add an assets section, like this:
     assets:
-        - assets/
-        - assets/images/
-        - assets/icons/
+        - ./assets
+        - ./assets/images
+        - ./assets/icons
 
     #   - images/a_dot_burr.jpeg
     #   - images/a_dot_ham.jpeg
@@ -84,7 +84,7 @@ flutter:
     fonts:
         - family: Trajan Pro
           fonts:
-              - asset: assets/fonts/sans-regular.ttf
+              - asset: assets/fonts/sans-bold.ttf
 
         - family: Trajan Pro
           fonts:

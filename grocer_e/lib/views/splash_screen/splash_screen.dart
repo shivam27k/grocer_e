@@ -41,7 +41,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   ],
                 ),
               ),
-              80.heightBox,
+              (context.screenHeight * 0.08).heightBox,
               Expanded(
                 flex: 1,
                 child: Column(
@@ -50,7 +50,7 @@ class _SplashScreenState extends State<SplashScreen> {
                     const CircularProgressIndicator(
                       color: logoTextColor,
                     ),
-                    20.heightBox,
+                    (context.screenHeight * 0.03).heightBox,
                     credits.text
                         .color(descColor)
                         .size(10)
