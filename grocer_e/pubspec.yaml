@@ -39,6 +39,7 @@ dependencies:
     get: ^4.6.5
     animated_text_kit: ^4.2.2
     animated_splash_screen: ^1.1.0
+    flutter_svg: ^2.0.4
 
 dev_dependencies:
     flutter_test:
@@ -82,13 +83,9 @@ flutter:
     # list giving the asset and other descriptors for the font. For
     # example:
     fonts:
-        - family: Trajan Pro
+        - family: montserrat
           fonts:
-              - asset: assets/fonts/sans-bold.ttf
-
-        - family: Trajan Pro
-          fonts:
-              - asset: assets/fonts/sans-bold.ttf
+              - asset: ./assets/fonts/montserrat.ttf
     #       - asset: fonts/TrajanPro_Bold.ttf
     #         weight: 700
     #

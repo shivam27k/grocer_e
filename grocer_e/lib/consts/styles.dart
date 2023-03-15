@@ -1,3 +1,1 @@
-const regular = 'sans-regular';
-
-const bold = 'sans-bold';
+const regular = 'montserrat';

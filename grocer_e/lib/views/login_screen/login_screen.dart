@@ -5,12 +5,15 @@ import 'package:grocer_e/widgets_common/bg_widget.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
     return bgWidget(
-        child: Scaffold(
-      body: Container(),
+        child: const Scaffold(
+      body: Center(
+        child: Text(
+          "Login page aagya hehe",
+        ),
+      ),
     ));
   }
 }

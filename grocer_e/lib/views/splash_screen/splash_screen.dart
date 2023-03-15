@@ -1,7 +1,7 @@
 // import 'package:flutter/src/widgets/framework.dart';
 // import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:grocer_e/consts/consts.dart';
-import 'package:grocer_e/views/auth_screen/login_screen.dart';
+import 'package:grocer_e/views/onboarding-screen/onboarding_screen.dart';
 import 'package:grocer_e/widgets_common/applogo_widget.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:page_transition/page_transition.dart';
@@ -64,7 +64,7 @@ class _SplashScreenState extends State<SplashScreen> {
         ],
       ),
       backgroundColor: splashBgColor,
-      nextScreen: const LoginScreen(),
+      nextScreen: const OnboardingScreen(),
       splashIconSize: 900,
       duration: 3500,
       splashTransition: SplashTransition.fadeTransition,
