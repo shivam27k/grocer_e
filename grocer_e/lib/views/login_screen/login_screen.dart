@@ -8,12 +8,13 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return bgWidget(
-        child: const Scaffold(
-      body: Center(
-        child: Text(
-          "Login page aagya hehe",
+      child: const Scaffold(
+        body: Center(
+          child: Text(
+            "Login page aagya hehe",
+          ),
         ),
       ),
-    ));
+    );
   }
 }

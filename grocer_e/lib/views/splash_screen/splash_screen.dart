@@ -68,7 +68,7 @@ class _SplashScreenState extends State<SplashScreen> {
       splashIconSize: 900,
       duration: 3500,
       splashTransition: SplashTransition.fadeTransition,
-      pageTransitionType: PageTransitionType.rightToLeft,
+      pageTransitionType: PageTransitionType.fade,
     );
   }
 }

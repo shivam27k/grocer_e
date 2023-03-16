@@ -85,7 +85,19 @@ flutter:
     fonts:
         - family: montserrat
           fonts:
-              - asset: ./assets/fonts/montserrat.ttf
+              - asset: ./assets/fonts/montserrat-regular.ttf
+
+        # - family: montserrat
+        #   fonts:
+        #       - asset: ./assets/fonts/montserrat-bold.ttf
+
+        # - family: montserrat
+        #   fonts:
+        #       - asset: ./assets/fonts/montserrat-medium.ttf
+
+        # - family: montserrat
+        #   fonts:
+        #       - asset: ./assets/fonts/montserrat-thin.ttf
     #       - asset: fonts/TrajanPro_Bold.ttf
     #         weight: 700
     #
