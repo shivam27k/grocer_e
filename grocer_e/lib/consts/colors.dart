@@ -6,19 +6,21 @@ const Color splashBgColor = Color.fromRGBO(25, 40, 65, 1);
 
 const Color blueColor = Color.fromRGBO(25, 40, 65, 1);
 
-const Color appBgColor = Color.fromRGBO(255, 255, 243, 0.9);
+const Color appBgColor = Color.fromRGBO(210, 220, 220, 1);
 
 const Color logoTextColor = Color.fromRGBO(255, 191, 83, 1);
 
 const Color descColor = Color.fromRGBO(255, 191, 83, 0.5);
 
-const Color fontGrey = Color.fromRGBO(107, 115, 119, 1);
+const Color fontGrey = Color.fromRGBO(107, 115, 119, 0.5);
 
 const Color darkFontGrey = Color.fromRGBO(62, 68, 71, 1);
 
 const Color lightGrey = Color.fromRGBO(209, 209, 209, 1);
 
 const Color whiteColor = Color.fromRGBO(255, 255, 255, 1);
+
+const Color borderWhiteColor = Color.fromRGBO(255, 255, 255, 0.7);
 
 const Color redColor = Color.fromRGBO(199, 0, 57, 1);
 
