@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "479198146234",
+    "project_id": "grocere-auth",
+    "storage_bucket": "grocere-auth.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:479198146234:android:c55d428f4dcffbc4775c83",
+        "android_client_info": {
+          "package_name": "com.example.grocer_e"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "479198146234-u09o07h49gi6afe49ss5g908h7104070.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCIN0xt_MjHHmP6yX5ffcYzE7GAYdDE_6Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "479198146234-u09o07h49gi6afe49ss5g908h7104070.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "479198146234-8cbrolsrdm5l6q6e4qugk9hjn3ftluc0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.grocere"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,8 +1,15 @@
 import 'package:get/get.dart';
+// import 'package:grocer_e/views/login_screen/login_screen.dart';
 import 'package:grocer_e/views/splash_screen/splash_screen.dart';
 import './consts/consts.dart';
 
-void main() {
+import 'firebase_options.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
@@ -19,6 +26,7 @@ class MyApp extends StatelessWidget {
         appBarTheme: const AppBarTheme(backgroundColor: Colors.transparent),
         fontFamily: regular,
       ),
+      // home: LoginScreen(),
       home: const SplashScreen(),
     );
   }

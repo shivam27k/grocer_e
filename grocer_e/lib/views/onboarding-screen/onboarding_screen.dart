@@ -1,5 +1,3 @@
-// import 'package:flutter/src/widgets/framework.dart';
-// import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:grocer_e/consts/consts.dart';
 import 'package:grocer_e/views/login_screen/login_screen.dart';
 import 'package:grocer_e/widgets_common/bg_widget.dart';
@@ -20,30 +18,31 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              (context.screenHeight * 0.15).heightBox,
               Image.asset(onboardingLady)
                   .box
                   .width(250)
                   .height(233)
                   .rounded
                   .make(),
-              (context.screenHeight * 0.05).heightBox,
-              Container(
+              (context.screenHeight * 0.04).heightBox,
+              SizedBox(
                 child: onboardHeading.text
                     .fontWeight(FontWeight.w500)
-                    .size(21)
+                    .size(30)
                     .make(),
               ),
               (context.screenHeight * 0.01).heightBox,
               SizedBox(
-                width: 200,
+                width: 330,
                 child: onboardText.text
                     .align(TextAlign.center)
-                    .size(16)
-                    .lineHeight(1.4)
+                    .size(22)
+                    .lineHeight(1.5)
                     .make(),
               ),
               (context.screenHeight * 0.15).heightBox,
-              40.heightBox,
+              // 30.heightBox,
               Container(
                 width: MediaQuery.of(context).size.width * 0.8,
                 height: 50,
@@ -60,7 +59,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 child: TextButton(
                   style: TextButton.styleFrom(
                     backgroundColor: blueColor,
-                    padding: const EdgeInsets.all(18.0),
                     textStyle: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w500,

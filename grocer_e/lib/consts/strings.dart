@@ -3,13 +3,15 @@ const appVersion = 'Version 1.0.0';
 const credits = 'Provided by S.Services';
 
 // OnboardingScreen
-const onboardHeading = "Busy? We got you covered.";
+const onboardHeading = "Busy? We've got you covered!";
 const buttonText = "Start Shopping Now";
 const onboardText =
-    "Grocer-E: Grocery delivery service so you don't leave your home.";
+    "Grocer-E: Grocery delivery service so you don't have to leave your home.";
 
 // LoginScreen
 const logInText = "LogIn To Your Account!";
+const hintEmail = "Enter your email";
+const hintPassword = "Enter your password";
 const forgotPasswordText = "Forgot Password?";
 const logInButton = "Log In";
 const continueOptionText = "Or continue with";
