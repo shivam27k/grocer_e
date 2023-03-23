@@ -17,3 +17,7 @@ const logInButton = "Log In";
 const continueOptionText = "Or continue with";
 const notAMember = "Not a member?";
 const createAccount = "Create an account.";
+
+const checkBothTitle = "Incorrect Email or Password";
+const checkBothContent = "Please check your credentials!";
+const alertButton = "Ok!";

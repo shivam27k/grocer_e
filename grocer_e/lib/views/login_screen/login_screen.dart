@@ -1,25 +1,91 @@
-// import 'package:flutter/src/widgets/framework.dart';
-// import 'package:flutter/src/widgets/placeholder.dart';
-// ignore: unnecessary_import
-import 'dart:ui';
-
 import 'package:grocer_e/components/my_text_field.dart';
 import 'package:grocer_e/consts/consts.dart';
 import 'package:grocer_e/widgets_common/applogo_widget.dart';
 import 'package:grocer_e/widgets_common/bg_widget.dart';
+import '../home_screen/home_screen.dart';
 
-class LoginScreen extends StatelessWidget {
-  LoginScreen({super.key});
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
 
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
   // text editing controllers
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
 
-  // sign user in
   void signUserIn() async {
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-      email: emailController.text,
-      password: passwordController.text,
+    BuildContext? context = _key.currentContext;
+
+    showDialog(
+      context: this.context,
+      builder: (BuildContext context) {
+        return const Center(
+          child: CircularProgressIndicator(color: logoTextColor),
+        );
+      },
+    );
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: emailController.text,
+        password: passwordController.text,
+      );
+      Navigator.pushReplacement(
+        context!,
+        MaterialPageRoute(
+          builder: (context) => const HomeScreen(),
+        ),
+      );
+    } on FirebaseAuthException catch (e) {
+      Navigator.pop(context!);
+      if (e.code == 'user-not-found') {
+        wrongEmailPasswordMessage();
+      } else if (e.code == 'wrong-password') {
+        wrongEmailPasswordMessage();
+      }
+    }
+  }
+
+  void wrongEmailPasswordMessage() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text(checkBothTitle),
+          content: const Text(checkBothContent),
+          backgroundColor: appBgColor,
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Container(
+                padding: const EdgeInsets.only(
+                    right: 20, left: 20, top: 10, bottom: 10),
+                decoration: BoxDecoration(
+                  color: blueColor,
+                  borderRadius: BorderRadius.circular(4),
+                  boxShadow: const [
+                    BoxShadow(
+                      blurRadius: 8,
+                      offset: Offset(0, 10),
+                      color: blackColor,
+                      spreadRadius: -9,
+                    ),
+                  ],
+                ),
+                child: const Text(
+                  alertButton,
+                  style: TextStyle(color: whiteColor),
+                ),
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 
@@ -29,6 +95,7 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return bgWidget(
       child: Scaffold(
+        key: _key,
         body: SingleChildScrollView(
           child: Center(
             child: Column(
@@ -115,7 +182,7 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {
-                      signUserIn;
+                      signUserIn();
                     },
                     child: const Text(
                       logInButton,

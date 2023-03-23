@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
-// import 'package:grocer_e/views/login_screen/login_screen.dart';
 import 'package:grocer_e/views/splash_screen/splash_screen.dart';
 import './consts/consts.dart';
 
+import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
 void main() async {
