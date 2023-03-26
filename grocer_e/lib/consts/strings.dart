@@ -21,3 +21,32 @@ const createAccount = "Create an account.";
 const checkBothTitle = "Incorrect Email or Password";
 const checkBothContent = "Please check your credentials!";
 const alertButton = "Ok!";
+
+// create user screen
+const createYourAccount = "Create a new account!";
+const alreadyUser = 'Already have an account?';
+const loginAccount = "Click here to Log in!";
+const createAccountButton = "Create Account!";
+const hintConfirmPassword = "Confirm Password";
+const hintCreatePassword = "Create Password";
+const passwordNotMatchText = "Password do not match!";
+const passwordNotMatchContent =
+    "Please check and fill the passwords carefully.";
+
+const accountCreatedText = "Account Created";
+const accountCreatedContent =
+    "Click on the button below to go to the log in page!";
+const accountCreatedButton = "Log In!";
+const accountAlreadyExistsText = "Account already exists!";
+const accountAlreadyExistsContent = "Log in from the button below.";
+
+const emptyFieldText = "Empty fields detected!";
+const emptyFieldContent = "Please fill out the empty fields correctly";
+const emptyText = "";
+
+const verifyEmailText = "Verify Email";
+const hintVerifyEmail = "OTP sent to";
+const verifyButtonText = "Verify";
+const sessionNameText = 'GrocerE OTP Request';
+const incorrectOTPText = "Incorrect OTP";
+const incorrectOTPContent = "Please check what you enter!";

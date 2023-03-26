@@ -2,7 +2,6 @@ import 'package:grocer_e/components/auth_page.dart';
 import 'package:grocer_e/consts/consts.dart';
 import 'package:grocer_e/widgets_common/bg_widget.dart';
 
-import '../login_screen/login_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

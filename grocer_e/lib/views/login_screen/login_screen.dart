@@ -1,5 +1,6 @@
 import 'package:grocer_e/components/my_text_field.dart';
 import 'package:grocer_e/consts/consts.dart';
+import 'package:grocer_e/views/create_user_screen/create_user_screen.dart';
 import 'package:grocer_e/widgets_common/applogo_widget.dart';
 import 'package:grocer_e/widgets_common/bg_widget.dart';
 import '../home_screen/home_screen.dart';
@@ -30,8 +31,8 @@ class _LoginScreenState extends State<LoginScreen> {
     );
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: emailController.text,
-        password: passwordController.text,
+        email: emailController.text.trim(),
+        password: passwordController.text.trim(),
       );
       Navigator.pushReplacement(
         context!,
@@ -120,7 +121,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         style: TextStyle(
                           fontWeight: FontWeight.w600,
                           color: darkFontGrey,
-                          fontSize: 24,
+                          fontSize: 30,
                         ),
                       ),
                     ],
@@ -135,7 +136,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 (context.screenHeight * 0.01).heightBox,
                 MyTextField(
                   controller: passwordController,
-                  hintText: hintPassword,
+                  hintText: hintConfirmPassword,
                   obscureText: true,
                 ),
                 (context.screenHeight * 0.001).heightBox,
@@ -149,7 +150,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         style: TextButton.styleFrom(
                           padding: const EdgeInsets.all(0.0),
                         ),
-                        onPressed: signUserIn,
+                        onPressed: () {},
                         child: const Text(
                           forgotPasswordText,
                           style: TextStyle(
@@ -282,7 +283,11 @@ class _LoginScreenState extends State<LoginScreen> {
                         padding: const EdgeInsets.all(0.0),
                       ),
                       onPressed: () {
-                        // ;
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const CreateUserScreen()),
+                        );
                       },
                       child: const Text(
                         createAccount,
