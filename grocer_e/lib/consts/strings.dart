@@ -14,13 +14,18 @@ const hintEmail = "Enter your email";
 const hintPassword = "Enter your password";
 const forgotPasswordText = "Forgot Password?";
 const logInButton = "Log In";
-const continueOptionText = "Or continue with";
+const continueOptionText = "Or";
+const signInWithGoogle = "Sign in with Google";
 const notAMember = "Not a member?";
 const createAccount = "Create an account.";
 
 const checkBothTitle = "Incorrect Email or Password";
 const checkBothContent = "Please check your credentials!";
 const alertButton = "Ok!";
+
+const setPasswordText = "Set a password as well!";
+const setPasswordContent =
+    "An email has been sent to set a password for your account!";
 
 const enterEmail = "Enter your email";
 const getPasswordResetLink = "Get your password reset link!";

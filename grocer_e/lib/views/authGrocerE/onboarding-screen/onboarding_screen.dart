@@ -1,6 +1,6 @@
 import 'package:grocer_e/consts/consts.dart';
-import 'package:grocer_e/views/login_screen/login_screen.dart';
-import 'package:grocer_e/widgets_common/bg_widget.dart';
+import 'package:grocer_e/views/authGrocerE/login_screen/login_screen.dart';
+import 'package:grocer_e/components/bg_widget.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});

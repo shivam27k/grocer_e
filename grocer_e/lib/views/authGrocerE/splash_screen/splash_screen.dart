@@ -2,7 +2,7 @@
 // import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:grocer_e/components/auth_page.dart';
 import 'package:grocer_e/consts/consts.dart';
-import 'package:grocer_e/widgets_common/applogo_widget.dart';
+import 'package:grocer_e/components/applogo_widget.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:page_transition/page_transition.dart';
 

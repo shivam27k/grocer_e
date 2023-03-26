@@ -1,7 +1,7 @@
 import 'package:grocer_e/consts/consts.dart';
-import 'package:grocer_e/views/onboarding-screen/onboarding_screen.dart';
+import 'package:grocer_e/views/authGrocerE/onboarding-screen/onboarding_screen.dart';
 
-import '../views/home_screen/home_screen.dart';
+import '../home_screen/home_screen.dart';
 
 class AuthPage extends StatelessWidget {
   const AuthPage({super.key});

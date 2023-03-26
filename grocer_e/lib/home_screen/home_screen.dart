@@ -1,6 +1,6 @@
 import 'package:grocer_e/components/auth_page.dart';
 import 'package:grocer_e/consts/consts.dart';
-import 'package:grocer_e/widgets_common/bg_widget.dart';
+import 'package:grocer_e/components/bg_widget.dart';
 
 
 class HomeScreen extends StatefulWidget {
