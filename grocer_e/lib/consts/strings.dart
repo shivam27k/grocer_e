@@ -22,6 +22,14 @@ const checkBothTitle = "Incorrect Email or Password";
 const checkBothContent = "Please check your credentials!";
 const alertButton = "Ok!";
 
+const enterEmail = "Enter your email";
+const getPasswordResetLink = "Get your password reset link!";
+
+const resetEmailSentText = "Reset Email Sent";
+const resetEmailSentContent = "You link to reset password was sent to";
+const userNotFoundText = "User Not Found";
+const userNotFoundContent = "Please create an account to log in!";
+
 // create user screen
 const createYourAccount = "Create a new account!";
 const alreadyUser = 'Already have an account?';

@@ -1,9 +1,12 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:grocer_e/components/my_text_field.dart';
 import 'package:grocer_e/consts/consts.dart';
 import 'package:grocer_e/views/create_user_screen/create_user_screen.dart';
 import 'package:grocer_e/widgets_common/applogo_widget.dart';
 import 'package:grocer_e/widgets_common/bg_widget.dart';
 import '../home_screen/home_screen.dart';
+// import 'package:email_otp/email_otp.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -90,7 +93,155 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  void forgotPassword() {}
+  Future<void> forgotPassword() async {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return const Center(
+          child: CircularProgressIndicator(
+            color: logoTextColor,
+          ),
+        );
+      },
+    );
+
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(
+        email: emailController.value.text.trim(),
+      );
+      Navigator.pop(context);
+      resetEmailSent();
+    } on FirebaseAuthException {
+      Navigator.pop(context);
+      userNotFound();
+    }
+  }
+
+  void resetEmailSent() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text(resetEmailSentText),
+          content:
+              Text("$resetEmailSentContent ${emailController.text.trim()}"),
+          backgroundColor: appBgColor,
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Container(
+                padding: const EdgeInsets.only(
+                    right: 20, left: 20, top: 10, bottom: 10),
+                decoration: BoxDecoration(
+                  color: blueColor,
+                  borderRadius: BorderRadius.circular(4),
+                  boxShadow: const [
+                    BoxShadow(
+                      blurRadius: 8,
+                      offset: Offset(0, 10),
+                      color: blackColor,
+                      spreadRadius: -9,
+                    ),
+                  ],
+                ),
+                child: const Text(
+                  alertButton,
+                  style: TextStyle(color: whiteColor),
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void userNotFound() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text(userNotFoundText),
+          content: const Text(userNotFoundContent),
+          backgroundColor: appBgColor,
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Container(
+                padding: const EdgeInsets.only(
+                    right: 20, left: 20, top: 10, bottom: 10),
+                decoration: BoxDecoration(
+                  color: blueColor,
+                  borderRadius: BorderRadius.circular(4),
+                  boxShadow: const [
+                    BoxShadow(
+                      blurRadius: 8,
+                      offset: Offset(0, 10),
+                      color: blackColor,
+                      spreadRadius: -9,
+                    ),
+                  ],
+                ),
+                child: const Text(
+                  alertButton,
+                  style: TextStyle(color: whiteColor),
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void enterEmailPop() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text(forgotPasswordText),
+          content: MyTextField(
+              controller: emailController,
+              hintText: hintEmail,
+              obscureText: false),
+          backgroundColor: appBgColor,
+          actions: <Widget>[
+            Center(
+              child: TextButton(
+                onPressed: () {
+                  forgotPassword();
+                },
+                child: Container(
+                  padding: const EdgeInsets.only(
+                      right: 40, left: 40, top: 15, bottom: 15),
+                  decoration: BoxDecoration(
+                    color: blueColor,
+                    borderRadius: BorderRadius.circular(4),
+                    boxShadow: const [
+                      BoxShadow(
+                        blurRadius: 8,
+                        offset: Offset(0, 10),
+                        color: blackColor,
+                        spreadRadius: -9,
+                      ),
+                    ],
+                  ),
+                  child: const Text(
+                    getPasswordResetLink,
+                    style: TextStyle(color: whiteColor),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -150,7 +301,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         style: TextButton.styleFrom(
                           padding: const EdgeInsets.all(0.0),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          enterEmailPop();
+                        },
                         child: const Text(
                           forgotPasswordText,
                           style: TextStyle(
