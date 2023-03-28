@@ -1,5 +1,5 @@
 import 'package:grocer_e/consts/consts.dart';
-import 'package:grocer_e/views/authGrocerE/login_screen/login_screen.dart';
+import 'package:grocer_e/views/auth_GrocerE/login_screen/login_screen.dart';
 import 'package:grocer_e/components/bg_widget.dart';
 
 class OnboardingScreen extends StatefulWidget {
@@ -67,7 +67,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const LoginScreen()),
+                      MaterialPageRoute(
+                          builder: (context) => const LoginScreen()),
                     );
                   },
                   child: const Text(

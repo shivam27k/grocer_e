@@ -1,5 +1,3 @@
-// import 'package:flutter/src/widgets/framework.dart';
-// import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:grocer_e/components/auth_page.dart';
 import 'package:grocer_e/consts/consts.dart';
 import 'package:grocer_e/components/applogo_widget.dart';
@@ -68,7 +66,7 @@ class _SplashScreenState extends State<SplashScreen> {
       splashIconSize: 900,
       duration: 3500,
       splashTransition: SplashTransition.fadeTransition,
-      pageTransitionType: PageTransitionType.fade,
+      pageTransitionType: PageTransitionType.rightToLeft,
     );
   }
 }

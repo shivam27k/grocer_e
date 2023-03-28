@@ -1,4 +1,6 @@
-const appName = 'Grocer-E';
+
+// splash screen
+const appName = 'GrocerE';
 const appVersion = 'Version 1.0.0';
 const credits = 'Provided by S.Services';
 

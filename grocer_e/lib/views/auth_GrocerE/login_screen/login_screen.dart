@@ -1,32 +1,99 @@
-// ignore_for_file: use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously, avoid_print
 
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:grocer_e/components/my_text_field.dart';
 import 'package:grocer_e/consts/consts.dart';
-import 'package:grocer_e/views/authGrocerE/login_screen/login_screen.dart';
+import 'package:grocer_e/views/auth_GrocerE/create_user_screen/create_user_screen.dart';
 import 'package:grocer_e/components/applogo_widget.dart';
 import 'package:grocer_e/components/bg_widget.dart';
-import 'package:email_otp/email_otp.dart';
+import 'package:grocer_e/views/navigation_GrocerE/navigation_screen.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
-import '../../../home_screen/home_screen.dart';
-
-class CreateUserScreen extends StatefulWidget {
-  const CreateUserScreen({super.key});
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
 
   @override
-  State<CreateUserScreen> createState() => _CreateUserScreenState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _CreateUserScreenState extends State<CreateUserScreen> {
-  final GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
-
+class _LoginScreenState extends State<LoginScreen> {
+  // text editing controllers
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController =
-      TextEditingController();
-  final TextEditingController otpController = TextEditingController();
+  final GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
 
-  checkIfEmailInUse(String emailAddress) async {
+  void signUserIn() async {
+    BuildContext? context = _key.currentContext;
+
+    showDialog(
+      context: this.context,
+      builder: (BuildContext context) {
+        return const Center(
+          child: CircularProgressIndicator(color: logoTextColor),
+        );
+      },
+    );
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: emailController.text.trim(),
+        password: passwordController.text.trim(),
+      );
+      Navigator.pushReplacement(
+        context!,
+        MaterialPageRoute(
+          builder: (context) => const NavScreen(),
+        ),
+      );
+    } on FirebaseAuthException catch (e) {
+      Navigator.pop(context!);
+      if (e.code == 'user-not-found') {
+        wrongEmailPasswordMessage();
+      } else if (e.code == 'wrong-password') {
+        wrongEmailPasswordMessage();
+      }
+    }
+  }
+
+  void wrongEmailPasswordMessage() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text(checkBothTitle),
+          content: const Text(checkBothContent),
+          backgroundColor: appBgColor,
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Container(
+                padding: const EdgeInsets.only(
+                    right: 20, left: 20, top: 10, bottom: 10),
+                decoration: BoxDecoration(
+                  color: blueColor,
+                  borderRadius: BorderRadius.circular(4),
+                  boxShadow: const [
+                    BoxShadow(
+                      blurRadius: 8,
+                      offset: Offset(0, 10),
+                      color: blackColor,
+                      spreadRadius: -9,
+                    ),
+                  ],
+                ),
+                child: const Text(
+                  alertButton,
+                  style: TextStyle(color: whiteColor),
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Future<void> forgotPassword() async {
     showDialog(
       context: context,
       builder: (context) {
@@ -37,95 +104,27 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
         );
       },
     );
-    try {
-      final list =
-          await FirebaseAuth.instance.fetchSignInMethodsForEmail(emailAddress);
 
-      if (list.isNotEmpty) {
-        if (FirebaseAuth.instance.currentUser?.providerData[2].providerId ==
-            'google.com') {
-          Navigator.pop(context);
-          sendOTP();
-        } else {
-          Navigator.pop(context);
-          accountAlreadyExists();
-        }
-      } else {
-        Navigator.pop(context);
-        sendOTP();
-      }
-    } catch (error) {
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(
+        email: emailController.value.text.trim(),
+      );
       Navigator.pop(context);
-      // accountAlreadyExists();
-    }
-  }
-
-  void signUserUp() async {
-    try {
-      if (passwordController.text.trim() ==
-          confirmPasswordController.text.trim()) {
-        await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: emailController.text.trim(),
-          password: passwordController.text.trim(),
-        );
-      }
+      resetEmailSent();
     } on FirebaseAuthException {
-      // Navigator.pop(context);
+      Navigator.pop(context);
+      userNotFound();
     }
   }
 
-  void accountAlreadyExists() {
+  void resetEmailSent() {
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text(accountAlreadyExistsText),
-          content: const Text(accountAlreadyExistsContent),
-          backgroundColor: appBgColor,
-          actions: <Widget>[
-            TextButton(
-              onPressed: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const LoginScreen(),
-                  ),
-                );
-              },
-              child: Container(
-                padding: const EdgeInsets.only(
-                    right: 20, left: 20, top: 10, bottom: 10),
-                decoration: BoxDecoration(
-                  color: blueColor,
-                  borderRadius: BorderRadius.circular(4),
-                  boxShadow: const [
-                    BoxShadow(
-                      blurRadius: 8,
-                      offset: Offset(0, 10),
-                      color: blackColor,
-                      spreadRadius: -9,
-                    ),
-                  ],
-                ),
-                child: const Text(
-                  accountCreatedButton,
-                  style: TextStyle(color: whiteColor),
-                ),
-              ),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  void passwordNotMatch() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text(passwordNotMatchText),
-          content: const Text(passwordNotMatchContent),
+          title: const Text(resetEmailSentText),
+          content:
+              Text("$resetEmailSentContent ${emailController.text.trim()}"),
           backgroundColor: appBgColor,
           actions: <Widget>[
             TextButton(
@@ -159,63 +158,13 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
     );
   }
 
-  EmailOTP myAuth = EmailOTP();
-
-  Future<void> sendOTP() async {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return const Center(
-          child: CircularProgressIndicator(
-            color: logoTextColor,
-          ),
-        );
-      },
-    );
-    myAuth.setConfig(
-        appEmail: "sinha.shruti0915@gmail.com",
-        appName: "GrocerE",
-        userEmail: emailController.value.text.trim(),
-        otpLength: 5,
-        otpType: OTPType.digitsOnly);
-
-    var res = await myAuth.sendOTP();
-    if (res) {
-      Navigator.pop(context);
-      verifyEmail();
-    }
-  }
-
-  Future<void> validateOTP() async {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return const Center(
-          child: CircularProgressIndicator(
-            color: logoTextColor,
-          ),
-        );
-      },
-    );
-    var inputOTP = otpController.value.text.trim();
-    var res = await myAuth.verifyOTP(otp: inputOTP);
-    if (res) {
-      Navigator.pop(context);
-      accountCreated();
-      signUserUp();
-    } else {
-      Navigator.pop(context);
-      incorrectOTP();
-    }
-  }
-
-  void incorrectOTP() {
+  void userNotFound() {
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text(incorrectOTPText),
-          content: const Text(incorrectOTPContent),
+          title: const Text(userNotFoundText),
+          content: const Text(userNotFoundContent),
           backgroundColor: appBgColor,
           actions: <Widget>[
             TextButton(
@@ -249,125 +198,42 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
     );
   }
 
-  void verifyEmail() {
+  void enterEmailPop() {
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text(verifyEmailText),
+          title: const Text(forgotPasswordText),
           content: MyTextField(
-              controller: otpController,
-              hintText: "$hintVerifyEmail ${emailController.text.trim()}",
+              controller: emailController,
+              hintText: hintEmail,
               obscureText: false),
           backgroundColor: appBgColor,
           actions: <Widget>[
-            TextButton(
-              onPressed: () {
-                validateOTP();
-              },
-              child: Container(
-                padding: const EdgeInsets.only(
-                    right: 40, left: 40, top: 10, bottom: 10),
-                decoration: BoxDecoration(
-                  color: blueColor,
-                  borderRadius: BorderRadius.circular(4),
-                  boxShadow: const [
-                    BoxShadow(
-                      blurRadius: 8,
-                      offset: Offset(0, 10),
-                      color: blackColor,
-                      spreadRadius: -9,
-                    ),
-                  ],
-                ),
-                child: const Text(
-                  verifyButtonText,
-                  style: TextStyle(color: whiteColor),
-                ),
-              ),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  void accountCreated() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text(accountCreatedText),
-          content: const Text(accountCreatedContent),
-          backgroundColor: appBgColor,
-          actions: <Widget>[
-            TextButton(
-              onPressed: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const LoginScreen(),
+            Center(
+              child: TextButton(
+                onPressed: () {
+                  forgotPassword();
+                },
+                child: Container(
+                  padding: const EdgeInsets.only(
+                      right: 40, left: 40, top: 15, bottom: 15),
+                  decoration: BoxDecoration(
+                    color: blueColor,
+                    borderRadius: BorderRadius.circular(4),
+                    boxShadow: const [
+                      BoxShadow(
+                        blurRadius: 8,
+                        offset: Offset(0, 10),
+                        color: blackColor,
+                        spreadRadius: -9,
+                      ),
+                    ],
                   ),
-                );
-              },
-              child: Container(
-                padding: const EdgeInsets.only(
-                    right: 20, left: 20, top: 10, bottom: 10),
-                decoration: BoxDecoration(
-                  color: blueColor,
-                  borderRadius: BorderRadius.circular(4),
-                  boxShadow: const [
-                    BoxShadow(
-                      blurRadius: 8,
-                      offset: Offset(0, 10),
-                      color: blackColor,
-                      spreadRadius: -9,
-                    ),
-                  ],
-                ),
-                child: const Text(
-                  accountCreatedButton,
-                  style: TextStyle(color: whiteColor),
-                ),
-              ),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  void emptyField() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text(emptyFieldText),
-          content: const Text(emptyFieldContent),
-          backgroundColor: appBgColor,
-          actions: <Widget>[
-            TextButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: Container(
-                padding: const EdgeInsets.only(
-                    right: 20, left: 20, top: 10, bottom: 10),
-                decoration: BoxDecoration(
-                  color: blueColor,
-                  borderRadius: BorderRadius.circular(4),
-                  boxShadow: const [
-                    BoxShadow(
-                      blurRadius: 8,
-                      offset: Offset(0, 10),
-                      color: blackColor,
-                      spreadRadius: -9,
-                    ),
-                  ],
-                ),
-                child: const Text(
-                  alertButton,
-                  style: TextStyle(color: whiteColor),
+                  child: const Text(
+                    getPasswordResetLink,
+                    style: TextStyle(color: whiteColor),
+                  ),
                 ),
               ),
             ),
@@ -395,12 +261,14 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
       idToken: googleAuth?.idToken,
     );
     try {
-      await FirebaseAuth.instance.signInWithCredential(credential);
-      Navigator.pop(context);
+      UserCredential? user = await FirebaseAuth.instance.signInWithCredential(
+        credential,
+      );
+      print(user.user?.email);
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => const HomeScreen(),
+          builder: (context) => const NavScreen(),
         ),
       );
     } on FirebaseAuthException {
@@ -433,7 +301,7 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
                       appLogoWidget(),
                       12.heightBox,
                       const Text(
-                        createYourAccount,
+                        logInText,
                         style: TextStyle(
                           fontWeight: FontWeight.w600,
                           color: darkFontGrey,
@@ -452,16 +320,33 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
                 (context.screenHeight * 0.01).heightBox,
                 MyTextField(
                   controller: passwordController,
-                  hintText: hintCreatePassword,
-                  obscureText: true,
-                ),
-                (context.screenHeight * 0.01).heightBox,
-                MyTextField(
-                  controller: confirmPasswordController,
                   hintText: hintConfirmPassword,
                   obscureText: true,
                 ),
-                (context.screenHeight * 0.075).heightBox,
+                (context.screenHeight * 0.001).heightBox,
+                Padding(
+                  padding: EdgeInsets.only(
+                      right: MediaQuery.of(context).size.width * 0.1),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      TextButton(
+                        style: TextButton.styleFrom(
+                          padding: const EdgeInsets.all(0.0),
+                        ),
+                        onPressed: () {
+                          enterEmailPop();
+                        },
+                        child: const Text(
+                          forgotPasswordText,
+                          style: TextStyle(
+                              color: fontGrey, fontWeight: FontWeight.w500),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                (context.screenHeight * 0.06).heightBox,
                 Container(
                   width: MediaQuery.of(context).size.width * 0.8,
                   height: 50,
@@ -484,24 +369,15 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
                       ),
                     ),
                     onPressed: () {
-                      if (passwordController.text.trim() == emptyText ||
-                          confirmPasswordController.text.trim() == emptyText ||
-                          emailController.text.trim() == emptyText) {
-                        emptyField();
-                      } else if (passwordController.text.trim() ==
-                          confirmPasswordController.text.trim()) {
-                        checkIfEmailInUse(emailController.text.trim());
-                      } else {
-                        passwordNotMatch();
-                      }
+                      signUserIn();
                     },
                     child: const Text(
-                      createAccountButton,
+                      logInButton,
                       style: TextStyle(color: whiteColor),
                     ),
                   ),
                 ),
-                (context.screenHeight * 0.04).heightBox,
+                (context.screenHeight * 0.05).heightBox,
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
                   child: Row(
@@ -569,7 +445,7 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Text(
-                      alreadyUser,
+                      notAMember,
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.w600,
@@ -584,11 +460,11 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const LoginScreen()),
+                              builder: (context) => const CreateUserScreen()),
                         );
                       },
                       child: const Text(
-                        loginAccount,
+                        createAccount,
                         style: TextStyle(
                           fontSize: 12,
                           color: blueColor,

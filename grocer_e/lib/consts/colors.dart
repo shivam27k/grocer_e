@@ -6,6 +6,8 @@ const Color splashBgColor = Color.fromRGBO(25, 40, 65, 1);
 
 const Color blueColor = Color.fromRGBO(25, 40, 65, 1);
 
+const Color iconBlueColor = Color.fromRGBO(25, 40, 65, 0.9);
+
 const Color appBgColor = Color.fromRGBO(210, 220, 220, 1);
 
 const Color logoTextColor = Color.fromRGBO(255, 191, 83, 1);

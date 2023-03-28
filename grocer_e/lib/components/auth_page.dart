@@ -1,7 +1,6 @@
 import 'package:grocer_e/consts/consts.dart';
-import 'package:grocer_e/views/authGrocerE/onboarding-screen/onboarding_screen.dart';
-
-import '../home_screen/home_screen.dart';
+import 'package:grocer_e/views/auth_GrocerE/onboarding_screen/onboarding_screen.dart';
+import 'package:grocer_e/views/navigation_GrocerE/navigation_screen.dart';
 
 class AuthPage extends StatelessWidget {
   const AuthPage({super.key});
@@ -13,7 +12,7 @@ class AuthPage extends StatelessWidget {
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            return const HomeScreen();
+            return const NavScreen();
           } else {
             return const OnboardingScreen();
           }
