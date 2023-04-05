@@ -5,37 +5,61 @@ Widget searchWidget(BuildContext context) {
   // using velocity X here
   return GestureDetector(
     onTap: () => {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const SearchScreen(),
+      Navigator.of(context).push(
+        PageRouteBuilder(
+          pageBuilder: (BuildContext context, Animation<double> animation,
+              Animation<double> secondaryAnimation) {
+            return const SearchScreen();
+          },
+          transitionsBuilder: (BuildContext context,
+              Animation<double> animation,
+              Animation<double> secondaryAnimation,
+              Widget child) {
+            return Align(
+              child: SlideTransition(
+                position: Tween(
+                        begin: const Offset(1.0, 0.0),
+                        end: const Offset(0.0, 0.0))
+                    .animate(animation),
+                child: child,
+              ),
+            );
+          },
+          transitionDuration: const Duration(milliseconds: 200),
         ),
       )
     },
-    child: Container(
-      height: 60,
-      width: (context.screenWidth * 0.85),
-      alignment: Alignment.center,
-      child: TextFormField(
-        decoration: const InputDecoration(
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: borderWhiteColor,
-            ),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Container(
+          height: 45,
+          width: MediaQuery.of(context).size.width * 0.30,
+          decoration: BoxDecoration(
+            color: blueColor,
+            borderRadius: BorderRadius.circular(4),
           ),
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: blueColor,
-            ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Icon(
+                Icons.search,
+                color: whiteColor,
+                size: 18,
+              ),
+              (context.screenWidth * 0.01).widthBox,
+              const Text(
+                "Search",
+                style: TextStyle(
+                  color: whiteColor,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ],
           ),
-          suffixIcon: Icon(Icons.search, color: blueColor),
-          filled: true,
-          fillColor: whiteColor,
-          hintText: "Search for any store/product",
-          hintStyle: TextStyle(color: lightGrey),
-          contentPadding: EdgeInsets.fromLTRB(20, 10, 0, 10),
         ),
-      ),
+      ],
     ),
   );
 }

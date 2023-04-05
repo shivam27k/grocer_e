@@ -33,7 +33,7 @@ const enterEmail = "Enter your email";
 const getPasswordResetLink = "Get your password reset link!";
 
 const resetEmailSentText = "Reset Email Sent";
-const resetEmailSentContent = "You link to reset password was sent to";
+const resetEmailSentContent = "Your link to reset password was sent to";
 const userNotFoundText = "User Not Found";
 const userNotFoundContent = "Please create an account to log in!";
 

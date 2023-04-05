@@ -14,7 +14,7 @@ const Color logoTextColor = Color.fromRGBO(255, 191, 83, 1);
 
 const Color descColor = Color.fromRGBO(255, 191, 83, 0.5);
 
-const Color fontGrey = Color.fromRGBO(107, 115, 119, 0.5);
+const Color fontGrey = Color.fromRGBO(51, 51, 51, 0.49);
 
 const Color darkFontGrey = Color.fromRGBO(62, 68, 71, 1);
 

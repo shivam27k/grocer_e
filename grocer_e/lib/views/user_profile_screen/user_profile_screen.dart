@@ -27,14 +27,24 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
   }
 
   notificationScreen() {
-    BuildContext? context = _key.currentContext;
-    // FirebaseAuth.instance.signOut();
-    Navigator.push(
-      context!,
-      MaterialPageRoute(
-        builder: (context) => const NotificationScreen(),
-      ),
-    );
+    Navigator.of(context).push(PageRouteBuilder(
+      pageBuilder: (BuildContext context, Animation<double> animation,
+          Animation<double> secondaryAnimation) {
+        return const NotificationScreen();
+      },
+      transitionsBuilder: (BuildContext context, Animation<double> animation,
+          Animation<double> secondaryAnimation, Widget child) {
+        return Align(
+          child: SlideTransition(
+            position: Tween(
+                    begin: const Offset(1.0, 0.0), end: const Offset(0.0, 0.0))
+                .animate(animation),
+            child: child,
+          ),
+        );
+      },
+      transitionDuration: const Duration(milliseconds: 200),
+    ));
   }
 
   @override
