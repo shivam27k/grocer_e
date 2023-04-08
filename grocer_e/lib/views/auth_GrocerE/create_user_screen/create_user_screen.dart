@@ -1,5 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:grocer_e/components/my_text_field.dart';
 import 'package:grocer_e/consts/consts.dart';
@@ -58,6 +59,18 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
     }
   }
 
+  User? currentUser = FirebaseAuth.instance.currentUser;
+
+  storeUserData(password, email) {
+    FirebaseFirestore.instance.collection("users").doc(currentUser!.uid).set({
+      'name': "",
+      'password': password,
+      'email': email,
+      'imageUrl': '',
+      'id': currentUser!.uid,
+    });
+  }
+
   void signUserUp() async {
     try {
       if (passwordController.text.trim() ==
@@ -65,6 +78,10 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
         await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: emailController.text.trim(),
           password: passwordController.text.trim(),
+        );
+        storeUserData(
+          passwordController.text.trim(),
+          emailController.text.trim(),
         );
       }
     } on FirebaseAuthException {
@@ -582,7 +599,8 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const LoginScreen()),
+                            builder: (context) => const LoginScreen(),
+                          ),
                         );
                       },
                       child: const Text(

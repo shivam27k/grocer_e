@@ -24,9 +24,11 @@ class _SearchScreenState extends State<SearchScreen> {
               15.heightBox,
               Container(
                 height: 60,
+                // margin: const EdgeInsets.symmetric(horizontal: 10),
                 padding: const EdgeInsets.only(
                     bottom: 5, top: 5, right: 23, left: 23),
                 alignment: Alignment.center,
+                color: blueColor,
                 child: TextField(
                   decoration: InputDecoration(
                     enabledBorder: const OutlineInputBorder(

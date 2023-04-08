@@ -1,5 +1,6 @@
 import 'package:grocer_e/consts/consts.dart';
 import 'package:grocer_e/components/bg_widget.dart';
+import 'package:grocer_e/views/search_screen/search_screen.dart';
 
 import '../../components/search_widget.dart';
 import '../views/notification_screen/notification_screen.dart';
@@ -40,6 +41,30 @@ class _CommonAppBarState extends State<CommonAppBar> {
     );
   }
 
+  searchScreen() {
+    Navigator.of(context).push(
+      PageRouteBuilder(
+        pageBuilder: (BuildContext context, Animation<double> animation,
+            Animation<double> secondaryAnimation) {
+          return const SearchScreen();
+        },
+        transitionsBuilder: (BuildContext context, Animation<double> animation,
+            Animation<double> secondaryAnimation, Widget child) {
+          return Align(
+            child: SlideTransition(
+              position: Tween(
+                      begin: const Offset(1.0, 0.0),
+                      end: const Offset(0.0, 0.0))
+                  .animate(animation),
+              child: child,
+            ),
+          );
+        },
+        transitionDuration: const Duration(milliseconds: 200),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return bgWidget(
@@ -52,44 +77,63 @@ class _CommonAppBarState extends State<CommonAppBar> {
                     top: 20, right: 24, bottom: 14, left: 24),
                 child: SafeArea(
                   child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        searchWidget(context),
-                        (context.screenWidth * 0.32).widthBox,
-                        Container(
-                          height: 45,
-                          width: 45,
-                          decoration: BoxDecoration(
-                            color: blueColor,
-                            borderRadius: BorderRadius.circular(4),
-                          ),
-                          child: IconButton(
-                            onPressed: () {},
-                            icon: const Icon(
-                              Icons.favorite,
-                              color: whiteColor,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      selectLocation(context),
+                      (context.screenWidth * 0.17).widthBox,
+                      Container(
+                        height: 45,
+                        width: 45,
+                        decoration: BoxDecoration(
+                          color: blueColor,
+                          borderRadius: BorderRadius.circular(4),
+                          boxShadow: const [
+                            BoxShadow(
+                              blurRadius: 16,
+                              offset: Offset(0, 10),
+                              color: blackColor,
+                              spreadRadius: -9,
                             ),
+                          ],
+                        ),
+                        child: IconButton(
+                          onPressed: () {
+                            searchScreen();
+                          },
+                          icon: const Icon(
+                            Icons.search,
+                            color: logoTextColor,
                           ),
                         ),
-                        (context.screenWidth * 0.04).widthBox,
-                        Container(
-                          height: 45,
-                          width: 45,
-                          decoration: BoxDecoration(
-                            color: blueColor,
-                            borderRadius: BorderRadius.circular(4),
-                          ),
-                          child: IconButton(
-                            onPressed: () {
-                              notificationScreen();
-                            },
-                            icon: const Icon(
-                              Icons.notifications,
-                              color: whiteColor,
+                      ),
+                      (context.screenWidth * 0.04).widthBox,
+                      Container(
+                        height: 45,
+                        width: 45,
+                        decoration: BoxDecoration(
+                          color: blueColor,
+                          borderRadius: BorderRadius.circular(4),
+                          boxShadow: const [
+                            BoxShadow(
+                              blurRadius: 16,
+                              offset: Offset(0, 10),
+                              color: blackColor,
+                              spreadRadius: -9,
                             ),
+                          ],
+                        ),
+                        child: IconButton(
+                          onPressed: () {
+                            notificationScreen();
+                          },
+                          icon: const Icon(
+                            Icons.notifications,
+                            color: logoTextColor,
                           ),
                         ),
-                      ]),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],

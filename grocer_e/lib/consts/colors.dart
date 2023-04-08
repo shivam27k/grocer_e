@@ -12,6 +12,8 @@ const Color appBgColor = Color.fromRGBO(210, 220, 220, 1);
 
 const Color logoTextColor = Color.fromRGBO(255, 191, 83, 1);
 
+const Color lightYellow = Color.fromRGBO(255, 191, 83, 0.5);
+
 const Color descColor = Color.fromRGBO(255, 191, 83, 0.5);
 
 const Color fontGrey = Color.fromRGBO(51, 51, 51, 0.49);
@@ -24,6 +26,6 @@ const Color whiteColor = Color.fromRGBO(255, 255, 255, 1);
 
 const Color borderWhiteColor = Color.fromRGBO(255, 255, 255, 0.7);
 
-const Color redColor = Color.fromRGBO(199, 0, 57, 1);
+const Color redColor = Color.fromRGBO(199, 0, 57, 0.5);
 
 const Color greenColor = Color.fromRGBO(0, 128, 0, 1);
