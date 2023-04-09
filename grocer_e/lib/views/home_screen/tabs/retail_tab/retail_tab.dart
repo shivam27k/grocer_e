@@ -23,6 +23,7 @@ class _RetailTabState extends State<RetailTab> {
   ];
 
   final featuredImages = [personalCare, cannedGoods, bakeryBread];
+
   final featuredImages2 = [
     aashirvaadAtta,
     potato,
@@ -31,7 +32,9 @@ class _RetailTabState extends State<RetailTab> {
     kitKat,
     lorealShampoo,
   ];
+
   final featuredTitle = ["Personal Care", "Canned Goods", "Bread & Bakery"];
+
   final featuredTitle2 = [
     "Aashirvaad Atta",
     "Potato",
@@ -40,14 +43,25 @@ class _RetailTabState extends State<RetailTab> {
     "Kit-Kat",
     "Loreal"
   ];
+
+  final featuredCategory = [
+    "Baking",
+    "Vegetables",
+    "Vegetables",
+    "Snacks",
+    "Snacks",
+    "Personal Care",
+  ];
+
   final featuredPrice = [
-    "Rs. 350",
+    "Rs. 260",
     "Rs. 20",
     "Rs. 15",
     "Rs. 50",
     "Rs. 50",
     "Rs. 110"
   ];
+
   final featuredQuantity = ["5kg", "1kg", "1kg", "1 Pc", "1 Pc", "1 Pc"];
 
   final shops = [
@@ -62,6 +76,7 @@ class _RetailTabState extends State<RetailTab> {
     shopImage9,
     shopImage10
   ];
+
   final shopsName = [
     "Rajendra Grocer Store",
     "Suvidha Supermarket",
@@ -87,6 +102,7 @@ class _RetailTabState extends State<RetailTab> {
     "3.1",
     "3.8",
   ];
+
   final distance = [
     "1.3km",
     "1.9km",
@@ -99,6 +115,7 @@ class _RetailTabState extends State<RetailTab> {
     "5.2km",
     "5.7km",
   ];
+
   final time = [
     "20 mins",
     "25 mins",
@@ -233,8 +250,27 @@ class _RetailTabState extends State<RetailTab> {
                                   fontSize: 25,
                                   fontWeight: FontWeight.bold),
                             ),
+                            Container(
+                              alignment: Alignment.center,
+                              padding: const EdgeInsets.fromLTRB(2, 1, 2, 1),
+                              decoration: BoxDecoration(
+                                color: logoTextColor,
+                                borderRadius: BorderRadius.circular(2),
+                              ),
+                              // width: 52,
+                              // height: 15,
+                              child: Text(
+                                featuredCategory[index],
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ),
                             7.heightBox,
-                            Row(
+                            Wrap(
+                              spacing: 80,
                               children: [
                                 Text(
                                   featuredPrice[index],
@@ -243,14 +279,14 @@ class _RetailTabState extends State<RetailTab> {
                                     fontSize: 15,
                                   ),
                                 ),
-                                (context.screenWidth / 4.3).widthBox,
+                                // (context.screenWidth / 4.3).widthBox,
                                 Text(
                                   featuredQuantity[index],
                                   style: const TextStyle(
                                       color: blueColor,
                                       fontSize: 15,
                                       fontWeight: FontWeight.w500),
-                                )
+                                ),
                               ],
                             )
                           ],
@@ -282,7 +318,7 @@ class _RetailTabState extends State<RetailTab> {
                       fontSize: 25,
                       fontWeight: FontWeight.bold,
                     ),
-                  ),
+                  ).marginOnly(left: 5),
                   30.heightBox,
                   GridView.builder(
                     physics: const NeverScrollableScrollPhysics(),
@@ -291,7 +327,7 @@ class _RetailTabState extends State<RetailTab> {
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 1,
-                      mainAxisSpacing: 10,
+                      mainAxisSpacing: 15,
                       mainAxisExtent: 150,
                     ),
                     itemBuilder: (context, index) {
@@ -304,6 +340,7 @@ class _RetailTabState extends State<RetailTab> {
                             // shopImage1,
                             height: 160,
                             width: 160,
+                            fit: BoxFit.cover,
                           ),
                           10.widthBox,
                           Flexible(
@@ -413,7 +450,7 @@ class _RetailTabState extends State<RetailTab> {
                           .padding(const EdgeInsets.all(10))
                           .make();
                     },
-                  )
+                  ),
                 ],
               ),
             ),
