@@ -34,6 +34,14 @@ const dairyMilk = "./assets/images/dairymilk.png";
 
 const kitKat = "./assets/images/kitkat.png";
 
+const schezwan = "./assets/images/schezwan.png";
+
+const amulMilk = "./assets/images/amulMilk.png";
+
+const maggie = "./assets/images/maggie.png";
+
+const oreo = "./assets/images/oreo.png";
+
 const aashirvaadAtta = "./assets/images/ashirvaad.png";
 
 const shopImage1 = "./assets/images/shopImage1.jpg";
@@ -55,3 +63,5 @@ const shopImage8 = "./assets/images/shopImage8.jpg";
 const shopImage9 = "./assets/images/shopImage9.jpg";
 
 const shopImage10 = "./assets/images/shopImage10.jpg";
+
+const defaultUser = "./assets/images/user.png";

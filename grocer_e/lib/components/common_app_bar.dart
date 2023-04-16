@@ -2,14 +2,12 @@ import 'package:grocer_e/consts/consts.dart';
 import 'package:grocer_e/components/bg_widget.dart';
 import 'package:grocer_e/views/search_screen/search_screen.dart';
 
-import '../../components/search_widget.dart';
+import 'select_location.dart';
 import '../views/notification_screen/notification_screen.dart';
 
 class CommonAppBar extends StatefulWidget {
   const CommonAppBar({
     super.key,
-
-    // required this.obscureText,
   });
 
   @override

@@ -21,6 +21,7 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
   final GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final TextEditingController nameController = TextEditingController();
   final TextEditingController confirmPasswordController =
       TextEditingController();
   final TextEditingController otpController = TextEditingController();
@@ -59,33 +60,45 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
     }
   }
 
-  User? currentUser = FirebaseAuth.instance.currentUser;
-
-  storeUserData(password, email) {
-    FirebaseFirestore.instance.collection("users").doc(currentUser!.uid).set({
-      'name': "",
-      'password': password,
-      'email': email,
-      'imageUrl': '',
-      'id': currentUser!.uid,
-    });
+  Future<void> storeUserData(String name, String password, String email) async {
+    final currentUser = FirebaseAuth.instance.currentUser;
+    if (currentUser != null) {
+      final userRef =
+          FirebaseFirestore.instance.collection('users').doc(currentUser.uid);
+      await userRef.set({
+        'name': name.allWordsCapitilize(),
+        'password': password,
+        'email': email,
+        'imageUrl': '',
+        'id': currentUser.uid,
+        'cart_count': "00",
+        'favorites_count': "00",
+        'orders_count': "00",
+      });
+    } else {
+      throw Exception('User not found');
+    }
   }
 
-  void signUserUp() async {
+  Future<void> signUserUp() async {
     try {
       if (passwordController.text.trim() ==
           confirmPasswordController.text.trim()) {
-        await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: emailController.text.trim(),
-          password: passwordController.text.trim(),
-        );
-        storeUserData(
-          passwordController.text.trim(),
-          emailController.text.trim(),
-        );
+        await FirebaseAuth.instance
+            .createUserWithEmailAndPassword(
+              email: emailController.text.trim(),
+              password: passwordController.text.trim(),
+            )
+            .then(
+              (value) => storeUserData(
+                nameController.text.trim(),
+                passwordController.text.trim(),
+                emailController.text.trim(),
+              ),
+            );
       }
-    } on FirebaseAuthException {
-      // Navigator.pop(context);
+    } on FirebaseAuthException catch (e) {
+      throw Exception(e.message);
     }
   }
 
@@ -433,7 +446,7 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
             child: Column(
               children: [
                 Container(
-                  height: MediaQuery.of(context).size.height * 0.40,
+                  height: MediaQuery.of(context).size.height * 0.33,
                   width: MediaQuery.of(context).size.width * 1,
                   decoration: const BoxDecoration(
                     gradient: LinearGradient(
@@ -458,25 +471,98 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
                     ],
                   ),
                 ),
-                (context.screenHeight * 0.01).heightBox,
-                MyTextField(
-                  controller: emailController,
-                  hintText: hintEmail,
-                  obscureText: false,
+                Column(
+                  children: [
+                    SizedBox(
+                      width: (context.screenWidth * 0.77),
+                      child: const Text(
+                        "Name",
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          fontSize: 15,
+                          color: blueColor,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    3.heightBox,
+                    MyTextField(
+                      controller: nameController,
+                      hintText: "Enter your Name",
+                      obscureText: false,
+                    ),
+                  ],
                 ),
-                (context.screenHeight * 0.01).heightBox,
-                MyTextField(
-                  controller: passwordController,
-                  hintText: hintCreatePassword,
-                  obscureText: true,
+                10.heightBox,
+                Column(
+                  children: [
+                    SizedBox(
+                      width: (context.screenWidth * 0.77),
+                      child: const Text(
+                        "Email",
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          fontSize: 15,
+                          color: blueColor,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    3.heightBox,
+                    MyTextField(
+                      controller: emailController,
+                      hintText: hintEmail,
+                      obscureText: false,
+                    ),
+                  ],
                 ),
-                (context.screenHeight * 0.01).heightBox,
-                MyTextField(
-                  controller: confirmPasswordController,
-                  hintText: hintConfirmPassword,
-                  obscureText: true,
+                10.heightBox,
+                Column(
+                  children: [
+                    SizedBox(
+                      width: (context.screenWidth * 0.77),
+                      child: const Text(
+                        "Password",
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          fontSize: 15,
+                          color: blueColor,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    3.heightBox,
+                    MyTextField(
+                      controller: passwordController,
+                      hintText: hintCreatePassword,
+                      obscureText: true,
+                    ),
+                  ],
                 ),
-                (context.screenHeight * 0.075).heightBox,
+                10.heightBox,
+                Column(
+                  children: [
+                    SizedBox(
+                      width: (context.screenWidth * 0.77),
+                      child: const Text(
+                        "Confirm Password",
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          fontSize: 15,
+                          color: blueColor,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    3.heightBox,
+                    MyTextField(
+                      controller: confirmPasswordController,
+                      hintText: hintConfirmPassword,
+                      obscureText: true,
+                    ),
+                  ],
+                ),
+                20.heightBox,
                 Container(
                   width: MediaQuery.of(context).size.width * 0.8,
                   height: 50,

@@ -312,18 +312,51 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 (context.screenHeight * 0.01).heightBox,
-                MyTextField(
-                  controller: emailController,
-                  hintText: hintEmail,
-                  obscureText: false,
+                Column(
+                  children: [
+                    SizedBox(
+                      width: (context.screenWidth * 0.77),
+                      child: const Text(
+                        "Email",
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          fontSize: 15,
+                          color: blueColor,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    3.heightBox,
+                    MyTextField(
+                      controller: emailController,
+                      hintText: hintEmail,
+                      obscureText: false,
+                    ),
+                  ],
                 ),
                 (context.screenHeight * 0.01).heightBox,
-                MyTextField(
-                  controller: passwordController,
-                  hintText: hintConfirmPassword,
-                  obscureText: true,
+                Column(
+                  children: [
+                    SizedBox(
+                      width: (context.screenWidth * 0.77),
+                      child: const Text(
+                        "Password",
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          fontSize: 15,
+                          color: blueColor,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    3.heightBox,
+                    MyTextField(
+                      controller: passwordController,
+                      hintText: hintConfirmPassword,
+                      obscureText: true,
+                    ),
+                  ],
                 ),
-                (context.screenHeight * 0.001).heightBox,
                 Padding(
                   padding: EdgeInsets.only(
                       right: MediaQuery.of(context).size.width * 0.1),
@@ -346,7 +379,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ],
                   ),
                 ),
-                (context.screenHeight * 0.06).heightBox,
+                (context.screenHeight * 0.04).heightBox,
                 Container(
                   width: MediaQuery.of(context).size.width * 0.8,
                   height: 50,

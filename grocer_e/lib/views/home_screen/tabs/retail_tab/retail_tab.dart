@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:grocer_e/components/featured_button.dart';
 import 'package:grocer_e/components/home_cards.dart';
 import 'package:grocer_e/consts/consts.dart';
+import 'package:grocer_e/views/home_screen/tabs/retail_tab/shops/shops_products.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class RetailTab extends StatefulWidget {
@@ -21,6 +22,8 @@ class _RetailTabState extends State<RetailTab> {
     sliderImg4,
     sliderImg5
   ];
+
+  bool isPressed = false;
 
   final featuredImages = [personalCare, cannedGoods, bakeryBread];
 
@@ -129,8 +132,38 @@ class _RetailTabState extends State<RetailTab> {
     "42 mins",
   ];
 
+  navigateShops(shopsName, shops) {
+    Navigator.of(context).push(
+      PageRouteBuilder(
+        pageBuilder: (BuildContext context, Animation<double> animation,
+            Animation<double> secondaryAnimation) {
+          return Shops(
+            title: shopsName,
+            image: shops,
+          );
+        },
+        transitionsBuilder: (BuildContext context, Animation<double> animation,
+            Animation<double> secondaryAnimation, Widget child) {
+          var tween =
+              Tween(begin: const Offset(0.0, 1.0), end: const Offset(0.0, 0.0))
+                  .chain(CurveTween(curve: Curves.ease));
+          return Align(
+            child: SlideTransition(
+              position: animation.drive(tween),
+              child: child,
+            ),
+          );
+        },
+        transitionDuration: const Duration(milliseconds: 400),
+      ),
+    );
+  }
+
+  Set<int> selectedIndices = {};
+
   @override
   Widget build(BuildContext context) => SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
         child: Column(
           children: [
             Container(
@@ -194,6 +227,7 @@ class _RetailTabState extends State<RetailTab> {
                 ),
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
+                  physics: const BouncingScrollPhysics(),
                   child: Row(
                     children: List.generate(
                       3,
@@ -231,9 +265,10 @@ class _RetailTabState extends State<RetailTab> {
                   15.heightBox,
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
+                    physics: const BouncingScrollPhysics(),
                     child: Row(
                       children: List.generate(
-                        6,
+                        featuredCategory.length,
                         (index) => Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -250,21 +285,21 @@ class _RetailTabState extends State<RetailTab> {
                                   fontSize: 25,
                                   fontWeight: FontWeight.bold),
                             ),
-                            Container(
-                              alignment: Alignment.center,
-                              padding: const EdgeInsets.fromLTRB(2, 1, 2, 1),
-                              decoration: BoxDecoration(
-                                color: logoTextColor,
-                                borderRadius: BorderRadius.circular(2),
-                              ),
-                              // width: 52,
-                              // height: 15,
-                              child: Text(
-                                featuredCategory[index],
-                                textAlign: TextAlign.center,
-                                style: const TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w500,
+                            UnconstrainedBox(
+                              child: Container(
+                                alignment: Alignment.center,
+                                padding: const EdgeInsets.fromLTRB(2, 1, 2, 1),
+                                decoration: BoxDecoration(
+                                  color: logoTextColor,
+                                  borderRadius: BorderRadius.circular(2),
+                                ),
+                                child: Text(
+                                  featuredCategory[index],
+                                  textAlign: TextAlign.center,
+                                  style: const TextStyle(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w500,
+                                  ),
                                 ),
                               ),
                             ),
@@ -323,7 +358,7 @@ class _RetailTabState extends State<RetailTab> {
                   GridView.builder(
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
-                    itemCount: 10,
+                    itemCount: shopsName.length,
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 1,
@@ -341,35 +376,82 @@ class _RetailTabState extends State<RetailTab> {
                             height: 160,
                             width: 160,
                             fit: BoxFit.cover,
-                          ),
+                          ).onTap(() {
+                            navigateShops(shopsName[index], shops[index]);
+                          }),
                           10.widthBox,
                           Flexible(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  shopsName[index],
-                                  softWrap: false,
-                                  maxLines: 2,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 21,
-                                  ),
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Flexible(
+                                      child: Text(
+                                        shopsName[index],
+                                        softWrap: false,
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 21,
+                                        ),
+                                      ).onTap(() {
+                                        navigateShops(
+                                            shopsName[index], shops[index]);
+                                      }),
+                                    ),
+                                    10.widthBox,
+                                    GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          if (selectedIndices.contains(index)) {
+                                            selectedIndices.remove(index);
+                                          } else {
+                                            selectedIndices.add(index);
+                                          }
+                                        });
+                                      },
+                                      child: Container(
+                                        width: 36,
+                                        alignment: Alignment.center,
+                                        height: 36,
+                                        decoration: BoxDecoration(
+                                          color: lightGrey,
+                                          borderRadius:
+                                              BorderRadius.circular(50),
+                                        ),
+                                        child: Icon(
+                                          Icons.favorite,
+                                          color: selectedIndices.contains(index)
+                                              ? Colors.red
+                                              : Colors.grey,
+                                        ),
+                                      ),
+                                    )
+                                  ],
                                 ),
-                                Container(
-                                  alignment: Alignment.center,
-                                  decoration: BoxDecoration(
-                                    color: logoTextColor,
-                                    borderRadius: BorderRadius.circular(2),
-                                  ),
-                                  width: 45,
-                                  height: 15,
-                                  child: const Text(
-                                    "Retailer",
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w500,
+                                UnconstrainedBox(
+                                  child: Container(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 5),
+                                    alignment: Alignment.center,
+                                    decoration: BoxDecoration(
+                                      color: logoTextColor,
+                                      borderRadius: BorderRadius.circular(2),
+                                    ),
+                                    // width: 45,
+                                    height: 15,
+                                    child: const Text(
+                                      "Retailer",
+                                      overflow: TextOverflow.visible,
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w500,
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -434,7 +516,9 @@ class _RetailTabState extends State<RetailTab> {
                                       ),
                                     ),
                                   ],
-                                )
+                                ).onTap(() {
+                                  navigateShops(shopsName[index], shops[index]);
+                                }),
                               ],
                             )
                                 .box
