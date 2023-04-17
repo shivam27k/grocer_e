@@ -23,7 +23,14 @@ class FireStoreServices {
         .snapshots();
   }
 
-  static deleteDocument(docId){
+  static deleteDocument(docId) {
     return firestore.collection(cartCollection).doc(docId).delete();
+  }
+
+  static getShops(category) {
+    return firestore
+        .collection(shopsCollectionRetail)
+        .where('s_category', isEqualTo: category)
+        .snapshots();
   }
 }

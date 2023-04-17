@@ -45,7 +45,7 @@ class _CartScreenState extends State<CartScreen> {
               Container(
                 height: MediaQuery.of(context).size.height,
                 padding:
-                    const EdgeInsets.only(bottom: 255, left: 20, right: 20),
+                    const EdgeInsets.only(bottom: 270, left: 20, right: 20),
                 child: StreamBuilder(
                   stream: FireStoreServices.getCart(currentUser!.uid),
                   builder: (BuildContext context,
@@ -55,8 +55,21 @@ class _CartScreenState extends State<CartScreen> {
                         child: loadingIndicator(),
                       );
                     } else if (snapshot.data!.docs.isEmpty) {
-                      return Center(
-                        child: "Cart is Empty!".text.color(blueColor).make(),
+                      return Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Icon(
+                            Icons.production_quantity_limits,
+                            size: 40,
+                            color: blueColor,
+                          ),
+                          10.heightBox,
+                          "Your cart is empty!"
+                              .text
+                              .fontWeight(FontWeight.bold)
+                              .color(blueColor)
+                              .make(),
+                        ],
                       );
                     } else {
                       var data = snapshot.data!.docs;

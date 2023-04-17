@@ -96,7 +96,7 @@ class Shops extends StatelessWidget {
                     ).onTap(() {
                       Navigator.pop(context);
                     }),
-                    (context.screenWidth * 0.45).widthBox,
+                    (context.screenWidth * 0.40).widthBox,
                     Container(
                       height: 41,
                       padding: const EdgeInsets.only(left: 15, right: 15),
@@ -141,7 +141,7 @@ class Shops extends StatelessWidget {
                         border: Border.all(width: 2),
                         borderRadius: BorderRadius.circular(4),
                       ),
-                      child: Image.asset(
+                      child: Image.network(
                         image!,
                         fit: BoxFit.cover,
                       ),
