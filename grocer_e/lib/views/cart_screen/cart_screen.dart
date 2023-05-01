@@ -7,7 +7,8 @@ import 'package:grocer_e/components/bg_widget.dart';
 import 'package:grocer_e/consts/firebase_consts.dart';
 import 'package:grocer_e/controllers/cart_controller.dart';
 import 'package:grocer_e/services/firestore_services.dart';
-// import 'package:grocer_e/views/category_screen/categories/categories.dart';
+
+import 'package:grocer_e/views/cart_screen/checkout_screen/payment_screen.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({super.key});
@@ -112,10 +113,12 @@ class _CartScreenState extends State<CartScreen> {
                                     ),
                                     trailing: const Icon(Icons.delete,
                                             color: redColor)
-                                        .onTap(() {
-                                      FireStoreServices.deleteDocument(
-                                          data[index].id);
-                                    }),
+                                        .onTap(
+                                      () {
+                                        FireStoreServices.deleteDocument(
+                                            data[index].id);
+                                      },
+                                    ),
                                   )
                                       .box
                                       .color(lightGrey)
@@ -183,7 +186,33 @@ class _CartScreenState extends State<CartScreen> {
                                   fontWeight: FontWeight.w500,
                                 ),
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.of(context).push(
+                                  PageRouteBuilder(
+                                    pageBuilder: (BuildContext context,
+                                        Animation<double> animation,
+                                        Animation<double> secondaryAnimation) {
+                                      return const PaymentScreen();
+                                    },
+                                    transitionsBuilder: (BuildContext context,
+                                        Animation<double> animation,
+                                        Animation<double> secondaryAnimation,
+                                        Widget child) {
+                                      return Align(
+                                        child: SlideTransition(
+                                          position: Tween(
+                                                  begin: const Offset(1.0, 0.0),
+                                                  end: const Offset(0.0, 0.0))
+                                              .animate(animation),
+                                          child: child,
+                                        ),
+                                      );
+                                    },
+                                    transitionDuration:
+                                        const Duration(milliseconds: 200),
+                                  ),
+                                );
+                              },
                               child: const Text(
                                 "Checkout",
                                 style: TextStyle(color: whiteColor),

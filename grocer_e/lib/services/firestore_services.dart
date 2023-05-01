@@ -33,4 +33,18 @@ class FireStoreServices {
         .where('s_category', isEqualTo: category)
         .snapshots();
   }
+
+  static getAddress(uid) {
+    return firestore
+        .collection("add_delivery_address")
+        .where('address_of', isEqualTo: uid)
+        .snapshots();
+  }
+
+  // static getFavorites(uid) {
+  //   return firestore
+  //       .collection(shopsCollectionRetail)
+  //       .where('s_favorite', isEqualTo: uid)
+  //       .snapshots();
+  // }
 }

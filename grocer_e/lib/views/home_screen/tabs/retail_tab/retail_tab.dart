@@ -1,7 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
-import 'package:grocer_e/components/featured_button.dart';
 import 'package:grocer_e/components/home_cards.dart';
 import 'package:grocer_e/components/loading_indicator.dart';
 import 'package:grocer_e/consts/consts.dart';
@@ -220,40 +219,40 @@ class _RetailTabState extends State<RetailTab> {
             ),
           ),
           25.heightBox,
-          Column(
-            children: [
-              Container(
-                padding: const EdgeInsets.only(left: 20),
-                alignment: Alignment.centerLeft,
-                child: const Text(
-                  "Featured Categories",
-                  style: TextStyle(
-                    color: blueColor,
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                physics: const BouncingScrollPhysics(),
-                child: Row(
-                  children: List.generate(
-                    3,
-                    (index) => Column(
-                      children: [
-                        featuredButton(
-                          icon: featuredImages[index],
-                          title: featuredTitle[index],
-                        ),
-                      ],
-                    ),
-                  ).toList(),
-                ).paddingAll(10),
-              ),
-            ],
-          ),
-          20.heightBox,
+          // Column(
+          //   children: [
+          //     Container(
+          //       padding: const EdgeInsets.only(left: 20),
+          //       alignment: Alignment.centerLeft,
+          //       child: const Text(
+          //         "Featured Categories",
+          //         style: TextStyle(
+          //           color: blueColor,
+          //           fontSize: 25,
+          //           fontWeight: FontWeight.bold,
+          //         ),
+          //       ),
+          //     ),
+          //     SingleChildScrollView(
+          //       scrollDirection: Axis.horizontal,
+          //       physics: const BouncingScrollPhysics(),
+          //       child: Row(
+          //         children: List.generate(
+          //           3,
+          //           (index) => Column(
+          //             children: [
+          //               featuredButton(
+          //                 icon: featuredImages[index],
+          //                 title: featuredTitle[index],
+          //               ),
+          //             ],
+          //           ),
+          //         ).toList(),
+          //       ).paddingAll(10),
+          //     ),
+          //   ],
+          // ),
+          // 20.heightBox,
           Container(
             padding: const EdgeInsets.all(20),
             width: double.infinity,

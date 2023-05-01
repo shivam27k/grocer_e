@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:grocer_e/consts/consts.dart';
-// import 'package:grocer_e/consts/consts.dart';
 import 'package:grocer_e/consts/firebase_consts.dart';
 
 class ShopController extends GetxController {
