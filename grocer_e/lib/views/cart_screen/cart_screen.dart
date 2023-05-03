@@ -8,7 +8,7 @@ import 'package:grocer_e/consts/firebase_consts.dart';
 import 'package:grocer_e/controllers/cart_controller.dart';
 import 'package:grocer_e/services/firestore_services.dart';
 
-import 'package:grocer_e/views/cart_screen/checkout_screen/payment_screen.dart';
+import 'package:grocer_e/views/cart_screen/checkout_screen/order_detail_screen.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({super.key});
@@ -75,6 +75,7 @@ class _CartScreenState extends State<CartScreen> {
                     } else {
                       var data = snapshot.data!.docs;
                       controller.calculateTotalCartPrice(data);
+                      controller.productSnapShot = data;
 
                       return Column(
                         children: [
@@ -192,7 +193,7 @@ class _CartScreenState extends State<CartScreen> {
                                     pageBuilder: (BuildContext context,
                                         Animation<double> animation,
                                         Animation<double> secondaryAnimation) {
-                                      return const PaymentScreen();
+                                      return const OrderDetailScreen();
                                     },
                                     transitionsBuilder: (BuildContext context,
                                         Animation<double> animation,

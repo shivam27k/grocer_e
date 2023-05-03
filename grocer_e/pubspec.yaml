@@ -60,6 +60,7 @@ dependencies:
     url_launcher_android: ^6.0.31
     mailto: ^2.0.0
     email_launcher: ^1.1.1
+    intl: ^0.17.0
 
 
 

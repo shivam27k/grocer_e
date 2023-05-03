@@ -91,7 +91,7 @@ class AddButtonContent extends StatelessWidget {
                   ),
                 ),
               ),
-              (context.screenWidth * 0.25).widthBox,
+              (context.screenWidth * 0.20).widthBox,
               const Text(
                 "Quantity:",
                 style: TextStyle(
@@ -148,7 +148,8 @@ class AddButtonContent extends StatelessWidget {
                         controller.increaseQuantity(
                           int.parse(maxAvailable),
                         );
-                        controller.calculateTotalPrice(int.parse(totalPrice));
+                        controller
+                            .calculateTotalPrice(int.tryParse(totalPrice));
                       },
                     ),
                   ],

@@ -27,7 +27,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 // import 'package:grocer_e/components/featured_button.dart';
-import 'package:grocer_e/components/home_cards.dart';
+// import 'package:grocer_e/components/home_cards.dart';
 import 'package:grocer_e/components/loading_indicator.dart';
 import 'package:grocer_e/consts/consts.dart';
 import 'package:grocer_e/controllers/shop_controller.dart';
@@ -67,101 +67,34 @@ class _WholesaleTabState extends State<WholesaleTab> {
 
   final featuredTitle = ["Personal Care", "Canned Goods", "Bread & Bakery"];
 
-  final featuredTitle2 = [
-    "Aashirvaad Atta",
-    "Potato",
-    "Onions",
-    "Dairy Milk",
-    "Kit-Kat",
-    "Loreal"
-  ];
+  // final featuredTitle2 = [
+  //   "Aashirvaad Atta",
+  //   "Potato",
+  //   "Onions",
+  //   "Dairy Milk",
+  //   "Kit-Kat",
+  //   "Loreal"
+  // ];
 
-  final featuredCategory = [
-    "Baking",
-    "Vegetables",
-    "Vegetables",
-    "Snacks",
-    "Snacks",
-    "Personal Care",
-  ];
+  // final featuredCategory = [
+  //   "Baking",
+  //   "Vegetables",
+  //   "Vegetables",
+  //   "Snacks",
+  //   "Snacks",
+  //   "Personal Care",
+  // ];
 
-  final featuredPrice = [
-    "Rs. 260",
-    "Rs. 20",
-    "Rs. 15",
-    "Rs. 50",
-    "Rs. 50",
-    "Rs. 110"
-  ];
+  // final featuredPrice = [
+  //   "Rs. 260",
+  //   "Rs. 20",
+  //   "Rs. 15",
+  //   "Rs. 50",
+  //   "Rs. 50",
+  //   "Rs. 110"
+  // ];
 
   final featuredQuantity = ["5kg", "1kg", "1kg", "1 Pc", "1 Pc", "1 Pc"];
-
-  // final shops = [
-  //   shopImage1,
-  //   shopImage2,
-  //   shopImage3,
-  //   shopImage4,
-  //   shopImage5,
-  //   shopImage6,
-  //   shopImage7,
-  //   shopImage8,
-  //   shopImage9,
-  //   shopImage10
-  // ];
-
-  // final shopsName = [
-  //   "Rajendra Grocer Store",
-  //   "Suvidha Supermarket",
-  //   "Smart Point",
-  //   "Narayan Grocery Store",
-  //   "Reliance Fresh",
-  //   "Sinha Supermart",
-  //   "Bhim Prasad Kirana Store",
-  //   "Apna Supermart",
-  //   "Daily Basket",
-  //   "A. S. Enterprise",
-  // ];
-
-  // final ratings = [
-  //   "4.5",
-  //   "4.8",
-  //   "4.3",
-  //   "3.9",
-  //   "3.5",
-  //   "4.1",
-  //   "3.8",
-  //   "4.2",
-  //   "3.1",
-  //   "3.8",
-  // ];
-
-  // final distance = [
-  //   "1.3km",
-  //   "1.9km",
-  //   "2.7km",
-  //   "2.9km",
-  //   "3.1km",
-  //   "3.5km",
-  //   "4.0km",
-  //   "4.5km",
-  //   "5.2km",
-  //   "5.7km",
-  // ];
-
-  // final time = [
-  //   "20 mins",
-  //   "25 mins",
-  //   "30 mins",
-  //   "30 mins",
-  //   "35 mins",
-  //   "38 mins",
-  //   "40 mins",
-  //   "40 mins",
-  //   "42 mins",
-  //   "42 mins",
-  // ];
-
-  // var controller = G
 
   navigateShops(shopsName, shops) {
     Navigator.of(context).push(
@@ -233,17 +166,17 @@ class _WholesaleTabState extends State<WholesaleTab> {
             ),
           ),
           30.heightBox,
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: List.generate(
-              2,
-              (index) => homeCards(
-                  height: context.screenHeight * 0.08,
-                  width: context.screenWidth / 2.5,
-                  icon: index == 0 ? Icons.local_offer : Icons.hourglass_top,
-                  title: index == 0 ? "Today's Offers" : "Flash Sale"),
-            ),
-          ),
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          //   children: List.generate(
+          //     2,
+          //     (index) => homeCards(
+          //         height: context.screenHeight * 0.08,
+          //         width: context.screenWidth / 2.5,
+          //         icon: index == 0 ? Icons.local_offer : Icons.hourglass_top,
+          //         title: index == 0 ? "Today's Offers" : "Flash Sale"),
+          //   ),
+          // ),
           25.heightBox,
           // // Column(
           // //   children: [
@@ -585,7 +518,7 @@ class _WholesaleTabState extends State<WholesaleTab> {
                                           size: 14,
                                         ),
                                         Text(
-                                          "${data[index]['s_time']} mins",
+                                          "${data[index]['s_time']} days",
                                           // time[index],
                                           softWrap: false,
                                           overflow: TextOverflow.fade,

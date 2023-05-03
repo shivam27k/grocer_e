@@ -14,69 +14,7 @@ class Shops extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final availableProductsTitle = [
-    //   "Aashirvaad Atta",
-    //   "Potato",
-    //   "Onions",
-    //   "Dairy Milk",
-    //   "Kit-Kat",
-    //   "Loreal",
-    //   "Schezwan Chutney",
-    //   "Amul Milk",
-    //   "Maggie",
-    //   "Oreo",
-    // ];
-    // final availableProductsCategory = [
-    //   "Baking",
-    //   "Vegetables",
-    //   "Vegetables",
-    //   "Snacks",
-    //   "Snacks",
-    //   "Personal Care",
-    //   "Vegetables",
-    //   "Snacks",
-    //   "Snacks",
-    //   "Personal Care",
-    // ];
-
-    // final availableProductsImage = [
-    //   aashirvaadAtta,
-    //   potato,
-    //   onions,
-    //   dairyMilk,
-    //   kitKat,
-    //   lorealShampoo,
-    //   schezwan,
-    //   amulMilk,
-    //   maggie,
-    //   oreo,
-    // ];
-
-    // final availableProductsPrice = [
-    //   "260",
-    //   "20",
-    //   "15",
-    //   "50",
-    //   "50",
-    //   "110",
-    //   "90",
-    //   "29",
-    //   "7",
-    //   "30",
-    // ];
-    // final availableProductsQuantity = [
-    //   "5 Kg",
-    //   "1 Kg",
-    //   "1 Kg",
-    //   "1 Pc",
-    //   "1 Pc",
-    //   "1 Pc",
-    //   "1 Pc",
-    //   "1 Pc",
-    //   "1 Pc",
-    //   "1 Pc",
-    // ];
-
+    
     return bgWidget(
       child: SafeArea(
         child: Container(

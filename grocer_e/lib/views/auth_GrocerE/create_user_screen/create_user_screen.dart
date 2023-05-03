@@ -187,6 +187,46 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
     );
   }
 
+  void passwordSmall() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text("Password less than 8 characters."),
+          content: const Text("Please enter a strong password."),
+          backgroundColor: appBgColor,
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Container(
+                padding: const EdgeInsets.only(
+                    right: 20, left: 20, top: 10, bottom: 10),
+                decoration: BoxDecoration(
+                  color: blueColor,
+                  borderRadius: BorderRadius.circular(4),
+                  boxShadow: const [
+                    BoxShadow(
+                      blurRadius: 8,
+                      offset: Offset(0, 10),
+                      color: blackColor,
+                      spreadRadius: -9,
+                    ),
+                  ],
+                ),
+                child: const Text(
+                  alertButton,
+                  style: TextStyle(color: whiteColor),
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   EmailOTP myAuth = EmailOTP();
 
   Future<void> sendOTP() async {
@@ -591,7 +631,11 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
                         emptyField();
                       } else if (passwordController.text.trim() ==
                           confirmPasswordController.text.trim()) {
-                        checkIfEmailInUse(emailController.text.trim());
+                        if (passwordController.text.trim().length < 8) {
+                          passwordSmall();
+                        } else {
+                          checkIfEmailInUse(emailController.text.trim());
+                        }
                       } else {
                         passwordNotMatch();
                       }

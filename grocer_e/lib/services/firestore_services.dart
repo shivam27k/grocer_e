@@ -41,10 +41,24 @@ class FireStoreServices {
         .snapshots();
   }
 
-  // static getFavorites(uid) {
-  //   return firestore
-  //       .collection(shopsCollectionRetail)
-  //       .where('s_favorite', isEqualTo: uid)
-  //       .snapshots();
-  // }
+  static getFavorites() {
+    return firestore
+        .collection(shopsCollectionRetail)
+        .where('s_favorite', arrayContains: currentUser!.uid)
+        .snapshots();
+  }
+
+  static getOrders() {
+    return firestore
+        .collection("orders")
+        .where('order_by_id', isEqualTo: currentUser!.uid)
+        .snapshots();
+  }
+
+  static searchProducts(title) {
+    return firestore
+        .collection(productsCollection)
+        .where('p_name', isLessThanOrEqualTo: title)
+        .get();
+  }
 }

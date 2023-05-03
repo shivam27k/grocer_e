@@ -1,11 +1,14 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
-import 'package:grocer_e/components/home_cards.dart';
+import 'package:grocer_e/components/add_button_content.dart';
+// import 'package:grocer_e/components/home_cards.dart';
 import 'package:grocer_e/components/loading_indicator.dart';
 import 'package:grocer_e/consts/consts.dart';
 import 'package:grocer_e/controllers/shop_controller.dart';
 import 'package:grocer_e/services/firestore_services.dart';
+import 'package:grocer_e/views/home_screen/tabs/retail_tab/offers/flash_sale_screen.dart';
+import 'package:grocer_e/views/home_screen/tabs/retail_tab/offers/todays_offer_screen.dart';
 import 'package:grocer_e/views/home_screen/tabs/retail_tab/shops/shops_products.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -28,8 +31,6 @@ class _RetailTabState extends State<RetailTab> {
 
   bool isPressed = false;
 
-  final featuredImages = [personalCare, cannedGoods, bakeryBread];
-
   final featuredImages2 = [
     aashirvaadAtta,
     potato,
@@ -38,8 +39,6 @@ class _RetailTabState extends State<RetailTab> {
     kitKat,
     lorealShampoo,
   ];
-
-  final featuredTitle = ["Personal Care", "Canned Goods", "Bread & Bakery"];
 
   final featuredTitle2 = [
     "Aashirvaad Atta",
@@ -59,83 +58,20 @@ class _RetailTabState extends State<RetailTab> {
     "Personal Care",
   ];
 
-  final featuredPrice = [
-    "Rs. 260",
-    "Rs. 20",
-    "Rs. 15",
-    "Rs. 50",
-    "Rs. 50",
-    "Rs. 110"
-  ];
+  final featuredPrice = ["260", "20", "15", "50", "50", "110"];
 
   final featuredQuantity = ["5kg", "1kg", "1kg", "1 Pc", "1 Pc", "1 Pc"];
 
-  // final shops = [
-  //   shopImage1,
-  //   shopImage2,
-  //   shopImage3,
-  //   shopImage4,
-  //   shopImage5,
-  //   shopImage6,
-  //   shopImage7,
-  //   shopImage8,
-  //   shopImage9,
-  //   shopImage10
-  // ];
+  final featuredAvailable = ["40", "50", "100", "30", "178", "32"];
 
-  // final shopsName = [
-  //   "Rajendra Grocer Store",
-  //   "Suvidha Supermarket",
-  //   "Smart Point",
-  //   "Narayan Grocery Store",
-  //   "Reliance Fresh",
-  //   "Sinha Supermart",
-  //   "Bhim Prasad Kirana Store",
-  //   "Apna Supermart",
-  //   "Daily Basket",
-  //   "A. S. Enterprise",
-  // ];
-
-  // final ratings = [
-  //   "4.5",
-  //   "4.8",
-  //   "4.3",
-  //   "3.9",
-  //   "3.5",
-  //   "4.1",
-  //   "3.8",
-  //   "4.2",
-  //   "3.1",
-  //   "3.8",
-  // ];
-
-  // final distance = [
-  //   "1.3km",
-  //   "1.9km",
-  //   "2.7km",
-  //   "2.9km",
-  //   "3.1km",
-  //   "3.5km",
-  //   "4.0km",
-  //   "4.5km",
-  //   "5.2km",
-  //   "5.7km",
-  // ];
-
-  // final time = [
-  //   "20 mins",
-  //   "25 mins",
-  //   "30 mins",
-  //   "30 mins",
-  //   "35 mins",
-  //   "38 mins",
-  //   "40 mins",
-  //   "40 mins",
-  //   "42 mins",
-  //   "42 mins",
-  // ];
-
-  // var controller = G
+  final featuredStore = [
+    "Rajendra Grocer Store",
+    "Suvidha Supermarket",
+    "Smart Point",
+    "Narayan Grocery Store",
+    "Reliance Fresh",
+    "Sinha Supermart",
+  ];
 
   navigateShops(shopsName, shops) {
     Navigator.of(context).push(
@@ -146,6 +82,54 @@ class _RetailTabState extends State<RetailTab> {
             title: shopsName,
             image: shops,
           );
+        },
+        transitionsBuilder: (BuildContext context, Animation<double> animation,
+            Animation<double> secondaryAnimation, Widget child) {
+          var tween =
+              Tween(begin: const Offset(0.0, 1.0), end: const Offset(0.0, 0.0))
+                  .chain(CurveTween(curve: Curves.ease));
+          return Align(
+            child: SlideTransition(
+              position: animation.drive(tween),
+              child: child,
+            ),
+          );
+        },
+        transitionDuration: const Duration(milliseconds: 400),
+      ),
+    );
+  }
+
+  todaysOffer() {
+    Navigator.of(context).push(
+      PageRouteBuilder(
+        pageBuilder: (BuildContext context, Animation<double> animation,
+            Animation<double> secondaryAnimation) {
+          return const TodaysOfferScreen();
+        },
+        transitionsBuilder: (BuildContext context, Animation<double> animation,
+            Animation<double> secondaryAnimation, Widget child) {
+          var tween =
+              Tween(begin: const Offset(0.0, 1.0), end: const Offset(0.0, 0.0))
+                  .chain(CurveTween(curve: Curves.ease));
+          return Align(
+            child: SlideTransition(
+              position: animation.drive(tween),
+              child: child,
+            ),
+          );
+        },
+        transitionDuration: const Duration(milliseconds: 400),
+      ),
+    );
+  }
+
+  flashSale() {
+    Navigator.of(context).push(
+      PageRouteBuilder(
+        pageBuilder: (BuildContext context, Animation<double> animation,
+            Animation<double> secondaryAnimation) {
+          return const FlashSaleScreen();
         },
         transitionsBuilder: (BuildContext context, Animation<double> animation,
             Animation<double> secondaryAnimation, Widget child) {
@@ -207,145 +191,211 @@ class _RetailTabState extends State<RetailTab> {
             ),
           ),
           30.heightBox,
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: List.generate(
-              2,
-              (index) => homeCards(
-                  height: context.screenHeight * 0.08,
-                  width: context.screenWidth / 2.5,
-                  icon: index == 0 ? Icons.local_offer : Icons.hourglass_top,
-                  title: index == 0 ? "Today's Offers" : "Flash Sale"),
-            ),
-          ),
-          25.heightBox,
-          // Column(
-          //   children: [
-          //     Container(
-          //       padding: const EdgeInsets.only(left: 20),
-          //       alignment: Alignment.centerLeft,
-          //       child: const Text(
-          //         "Featured Categories",
-          //         style: TextStyle(
-          //           color: blueColor,
-          //           fontSize: 25,
-          //           fontWeight: FontWeight.bold,
-          //         ),
-          //       ),
-          //     ),
-          //     SingleChildScrollView(
-          //       scrollDirection: Axis.horizontal,
-          //       physics: const BouncingScrollPhysics(),
-          //       child: Row(
-          //         children: List.generate(
-          //           3,
-          //           (index) => Column(
-          //             children: [
-          //               featuredButton(
-          //                 icon: featuredImages[index],
-          //                 title: featuredTitle[index],
-          //               ),
-          //             ],
-          //           ),
-          //         ).toList(),
-          //       ).paddingAll(10),
-          //     ),
-          //   ],
-          // ),
-          // 20.heightBox,
-          Container(
-            padding: const EdgeInsets.all(20),
-            width: double.infinity,
-            decoration: const BoxDecoration(
-              color: blueColor,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  "Featured Products",
-                  style: TextStyle(
-                    color: whiteColor,
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold,
+          Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+            Container(
+              decoration: const BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    blurRadius: 16,
+                    offset: Offset(0, 10),
+                    color: blackColor,
+                    spreadRadius: -9,
                   ),
-                ),
-                15.heightBox,
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  physics: const BouncingScrollPhysics(),
-                  child: Row(
-                    children: List.generate(
-                      featuredCategory.length,
-                      (index) => Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Image.asset(
-                            featuredImages2[index],
-                            width: 150,
-                            height: 150,
-                            fit: BoxFit.cover,
-                          ),
-                          Text(
-                            featuredTitle2[index],
-                            style: const TextStyle(
-                                color: blueColor,
-                                fontSize: 25,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          UnconstrainedBox(
-                            child: Container(
-                              alignment: Alignment.center,
-                              padding: const EdgeInsets.fromLTRB(2, 1, 2, 1),
-                              decoration: BoxDecoration(
-                                color: logoTextColor,
-                                borderRadius: BorderRadius.circular(2),
-                              ),
-                              child: Text(
-                                featuredCategory[index],
-                                textAlign: TextAlign.center,
-                                style: const TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w500,
+                ],
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Icon(Icons.local_offer, size: 35, color: logoTextColor)
+                      .onTap(() {
+                    todaysOffer();
+                  }),
+                  10.heightBox,
+                  const Text(
+                    "Today's Offers",
+                    style: TextStyle(
+                      color: whiteColor,
+                      fontSize: 15,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ).onTap(() {
+                    todaysOffer();
+                  }),
+                ],
+              )
+                  .box
+                  .rounded
+                  .color(blueColor)
+                  .size(context.screenWidth / 2.5, context.screenHeight * 0.1)
+                  .make(),
+            ),
+            Container(
+              decoration: const BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    blurRadius: 16,
+                    offset: Offset(0, 10),
+                    color: blackColor,
+                    spreadRadius: -9,
+                  ),
+                ],
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Icon(Icons.hourglass_top,
+                          size: 35, color: logoTextColor)
+                      .onTap(() {
+                    flashSale();
+                  }),
+                  10.heightBox,
+                  const Text(
+                    "Flash Sale",
+                    style: TextStyle(
+                      color: whiteColor,
+                      fontSize: 15,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ).onTap(() {
+                    flashSale();
+                  }),
+                ],
+              )
+                  .box
+                  .rounded
+                  .color(blueColor)
+                  .size(context.screenWidth / 2.5, context.screenHeight * 0.1)
+                  .make(),
+            ),
+          ]),
+          25.heightBox,
+          Container(
+              padding: const EdgeInsets.all(20),
+              width: double.infinity,
+              decoration: const BoxDecoration(
+                color: blueColor,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    "Featured Products",
+                    style: TextStyle(
+                      color: whiteColor,
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  15.heightBox,
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    physics: const BouncingScrollPhysics(),
+                    child: Row(
+                      children: List.generate(
+                        featuredCategory.length,
+                        (index) => Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Image.network(
+                              featuredImages2[index],
+                              width: 150,
+                              height: 150,
+                              fit: BoxFit.cover,
+                            ),
+                            Text(
+                              featuredTitle2[index],
+                              style: const TextStyle(
+                                  color: blueColor,
+                                  fontSize: 25,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            UnconstrainedBox(
+                              child: Container(
+                                alignment: Alignment.center,
+                                padding: const EdgeInsets.fromLTRB(2, 1, 2, 1),
+                                decoration: BoxDecoration(
+                                  color: logoTextColor,
+                                  borderRadius: BorderRadius.circular(2),
+                                ),
+                                child: Text(
+                                  featuredCategory[index],
+                                  textAlign: TextAlign.center,
+                                  style: const TextStyle(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w500,
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                          7.heightBox,
-                          Wrap(
-                            spacing: 80,
-                            children: [
-                              Text(
-                                featuredPrice[index],
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 15,
-                                ),
-                              ),
-                              // (context.screenWidth / 4.3).widthBox,
-                              Text(
-                                featuredQuantity[index],
-                                style: const TextStyle(
-                                    color: blueColor,
+                            7.heightBox,
+                            Wrap(
+                              spacing: 80,
+                              children: [
+                                Text(
+                                  featuredPrice[index],
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.w500,
                                     fontSize: 15,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                            ],
-                          )
-                        ],
-                      )
-                          .box
-                          .color(whiteColor)
-                          .roundedSM
-                          .padding(const EdgeInsets.all(15))
-                          .margin(const EdgeInsets.fromLTRB(10, 0, 10, 0))
-                          .make(),
-                    ).toList(),
+                                  ),
+                                ),
+                                // (context.screenWidth / 4.3).widthBox,
+                                Text(
+                                  featuredQuantity[index],
+                                  style: const TextStyle(
+                                      color: blueColor,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                              ],
+                            )
+                          ],
+                        )
+                            .box
+                            .color(whiteColor)
+                            .roundedSM
+                            .padding(const EdgeInsets.all(15))
+                            .margin(const EdgeInsets.fromLTRB(10, 0, 10, 0))
+                            .make()
+                            .onTap(() {
+                          showModalBottomSheet(
+                            isDismissible: false,
+                            context: context,
+                            builder: (BuildContext context) {
+                              return WillPopScope(
+                                onWillPop: () async => false,
+                                child: Container(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(20, 0, 20, 10),
+                                  height: 260,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      AddButtonContent(
+                                        productTitle: featuredTitle2[index],
+                                        productCategory:
+                                            featuredCategory[index],
+                                        productPrice: featuredPrice[index],
+                                        productQuantity:
+                                            featuredQuantity[index],
+                                        productAvailable:
+                                            featuredAvailable[index],
+                                        maxAvailable: featuredAvailable[index],
+                                        totalPrice: featuredPrice[index],
+                                        productImage: featuredImages2[index],
+                                        storeName: featuredStore[index],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                          );
+                        }),
+                      ).toList(),
+                    ),
                   ),
-                ),
-              ],
-            ),
-          ),
+                ],
+              )),
           35.heightBox,
           Container(
             // height: 100,

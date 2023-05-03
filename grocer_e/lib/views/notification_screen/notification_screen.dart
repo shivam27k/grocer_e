@@ -13,10 +13,38 @@ class _NotificationScreenState extends State<NotificationScreen> {
   Widget build(BuildContext context) {
     return bgWidget(
       child: Scaffold(
-        appBar: AppBar(
-          title: const Text("Notifications"),
+        appBar: AppBar(title: const Text("Notifications")),
+        body: Container(
+          padding: const EdgeInsets.fromLTRB(15, 20, 15, 30),
+          child: Column(
+            children: [
+              Container(
+                height: 100,
+                decoration: BoxDecoration(
+                  color: lightGrey,
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                child: Row(
+                  children: [
+                    Image.asset(
+                      './assets/images/deliveryBoy.png',
+                    ).box.padding(const EdgeInsets.all(15)).make(),
+                    const SizedBox(
+                      width: 270,
+                      child: Text(
+                        "Your order has been delivered successfully",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ).box.outerShadowXl.make(),
+            ],
+          ),
         ),
-        body: Container(),
       ),
     );
   }
