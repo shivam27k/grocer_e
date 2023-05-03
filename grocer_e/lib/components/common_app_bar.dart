@@ -81,7 +81,7 @@ class _CommonAppBarState extends State<CommonAppBar> {
                       (context.screenWidth * 0.17).widthBox,
                       Container(
                         height: 45,
-                        width: 45,
+                        width: 40,
                         decoration: BoxDecoration(
                           color: blueColor,
                           borderRadius: BorderRadius.circular(4),

@@ -114,7 +114,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                                 data[index]['s_image'],
                               );
                             }),
-                            10.widthBox,
+                            // 10.widthBox,
                             Flexible(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -143,7 +143,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                                           );
                                         }),
                                       ),
-                                      8.widthBox,
+                                      5.widthBox,
                                       GestureDetector(
                                         onTap: () {
                                           setState(() {
@@ -251,7 +251,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                                           fontWeight: FontWeight.w600,
                                         ),
                                       ),
-                                      8.widthBox,
+                                      5.widthBox,
                                       const Icon(
                                         Icons.timer,
                                         color: logoTextColor,

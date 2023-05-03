@@ -250,7 +250,7 @@ class AddButtonContent extends StatelessWidget {
               ),
               2.widthBox,
               SizedBox(
-                width: (context.screenWidth) * 0.422,
+                width: (context.screenWidth) * 0.40,
                 child: ElevatedButton(
                   onPressed: () {
                     if (controller.quantity.value == 0) {

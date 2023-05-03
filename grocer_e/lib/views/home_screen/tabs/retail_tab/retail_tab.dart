@@ -464,7 +464,7 @@ class _RetailTabState extends State<RetailTab> {
                                   data[index]['s_image'],
                                 );
                               }),
-                              10.widthBox,
+                              // 10.widthBox,
                               Flexible(
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -493,7 +493,7 @@ class _RetailTabState extends State<RetailTab> {
                                             );
                                           }),
                                         ),
-                                        8.widthBox,
+                                        2.widthBox,
                                         GestureDetector(
                                           onTap: () {
                                             setState(() {
@@ -602,7 +602,7 @@ class _RetailTabState extends State<RetailTab> {
                                             fontWeight: FontWeight.w600,
                                           ),
                                         ),
-                                        8.widthBox,
+                                        5.widthBox,
                                         const Icon(
                                           Icons.timer,
                                           color: logoTextColor,

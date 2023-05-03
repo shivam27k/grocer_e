@@ -373,7 +373,7 @@ class _WholesaleTabState extends State<WholesaleTab> {
                                   data[index]['s_image'],
                                 );
                               }),
-                              10.widthBox,
+                              // 10.widthBox,
                               Flexible(
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
