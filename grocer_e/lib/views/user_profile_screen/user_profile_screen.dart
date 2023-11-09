@@ -13,7 +13,7 @@ import 'package:grocer_e/views/user_profile_screen/favorites_screen/favorites_sc
 import 'package:grocer_e/views/user_profile_screen/orders_screen/orders_screen.dart';
 import 'package:grocer_e/views/user_profile_screen/saved_address_screen/saved_address_screen.dart';
 import 'package:grocer_e/views/user_profile_screen/terms_and_condition_screen/terms_and_condition_screen.dart';
-import 'components/details_card.dart';
+// import 'components/details_card.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class UserProfileScreen extends StatefulWidget {

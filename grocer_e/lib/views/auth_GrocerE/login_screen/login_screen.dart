@@ -411,10 +411,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 (context.screenHeight * 0.05).heightBox,
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20.0),
                   child: Row(
-                    children: const [
+                    children: [
                       Expanded(
                         child: Divider(
                           thickness: 0.5,

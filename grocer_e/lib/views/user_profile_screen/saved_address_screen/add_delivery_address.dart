@@ -60,13 +60,13 @@ class _AddDeliveryAddressState extends State<AddDeliveryAddress> {
             children: [
               InkWell(
                 onTap: () => {},
-                child: SizedBox(
+                child: const SizedBox(
                   // height: 50,
                   width: double.infinity,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.end,
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
+                    children: [
                       Text(
                         "Fill address details",
                         style: TextStyle(
@@ -259,13 +259,13 @@ class _AddDeliveryAddressState extends State<AddDeliveryAddress> {
               ),
               InkWell(
                 onTap: () => {},
-                child: SizedBox(
+                child: const SizedBox(
                   height: 50,
                   width: double.infinity,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.end,
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
+                    children: [
                       Text(
                         "Set location",
                         style: TextStyle(

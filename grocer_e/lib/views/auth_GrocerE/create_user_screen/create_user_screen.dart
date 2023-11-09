@@ -647,10 +647,10 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
                   ),
                 ),
                 (context.screenHeight * 0.04).heightBox,
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20.0),
                   child: Row(
-                    children: const [
+                    children: [
                       Expanded(
                         child: Divider(
                           thickness: 0.5,

@@ -79,8 +79,8 @@ class _SavedAddressScreenState extends State<SavedAddressScreen> {
           ),
         ),
         body: ListView(
-          children: [
-            const ListTile(
+          children: const [
+            ListTile(
               title: Text("Deliver To",
                   style: TextStyle(
                       color: blueColor,
@@ -90,9 +90,9 @@ class _SavedAddressScreenState extends State<SavedAddressScreen> {
               minLeadingWidth: 10,
               leading: Icon(Icons.place, size: 23, color: blueColor),
             ),
-            const Divider(),
+            Divider(),
             Column(
-              children: const [
+              children: [
                 AddressList(),
               ],
             ),

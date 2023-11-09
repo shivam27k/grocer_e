@@ -1,7 +1,8 @@
 import 'package:get/get.dart';
 import 'package:grocer_e/components/bg_widget.dart';
 import 'package:grocer_e/consts/consts.dart';
-import 'package:grocer_e/controllers/search_controller.dart';
+import 'package:grocer_e/controllers/search_controller.dart'
+    as search_controller;
 import 'package:grocer_e/views/search_screen/search_result_screen.dart';
 // import 'package:grocer_e/views/navigation_GrocerE/navigation_screen.dart';
 
@@ -19,7 +20,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var controller = Get.put(SearchController());
+    var controller = Get.put(search_controller.SearchController());
 
     return bgWidget(
       child: SafeArea(
